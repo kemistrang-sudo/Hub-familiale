@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏡%3C/text%3E%3C/svg%3E" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#FCFAF5" />
+<title>Famille SHOLA STRANGER · Maison Secrète</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'Menlo', 'monospace'],
+        },
+        colors: {
+          cream: { 50: '#FCFAF5', 100: '#F8F4EC', 200: '#F0E9DA' },
+          sand: { 100: '#EFE7D6', 200: '#E0D3B8', 300: '#C9B58E', 400: '#A89368' },
+          royal: { 50: '#EEF3FB', 100: '#D6E0F3', 400: '#5079C4', 500: '#2E5AA7', 600: '#23478A', 700: '#1B3A73' },
+          slate2: { 700: '#3A3F4B', 800: '#2A2E38', 900: '#1C1F26' },
+        },
+        boxShadow: {
+          soft: '0 8px 30px rgba(46, 90, 167, 0.08)',
+          cozy: '0 4px 20px rgba(168, 147, 104, 0.15)',
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html, body, #root { height: 100%; background: #FCFAF5; color: #2A2E38;
+    font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { background-image:
+      radial-gradient(at 12% 8%, rgba(46, 90, 167, 0.05) 0px, transparent 50%),
+      radial-gradient(at 88% 92%, rgba(168, 147, 104, 0.10) 0px, transparent 50%);
+    min-height: 100vh; }
+  ::selection { background: rgba(46,90,167,0.18); color: #1B3A73; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(168, 147, 104, 0.25); border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(168, 147, 104, 0.45); }
+  button, a { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid rgba(46,90,167,0.4); outline-offset: 2px; border-radius: 14px; }
+  .title-serif { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.01em; }
+  .font-mono-tab { font-family: 'JetBrains Mono', Menlo, monospace; }
+
+  .sky-day      { background: linear-gradient(160deg, #FDF6E3 0%, #F8E1B8 40%, #EAB873 100%); }
+  .sky-night    { background: linear-gradient(160deg, #1B2A4A 0%, #2E3F66 50%, #4B5A83 100%); }
+  .sky-evening  { background: linear-gradient(160deg, #F8B569 0%, #DC7A6B 50%, #5B5089 100%); }
+  .sky-morning  { background: linear-gradient(160deg, #FFE4C4 0%, #FFCFA0 50%, #FFB089 100%); }
+
+  .stars { position: relative; overflow: hidden; }
+  .stars::after {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, white, transparent),
+      radial-gradient(1px 1px at 50% 70%, white, transparent),
+      radial-gradient(1.5px 1.5px at 75% 25%, white, transparent),
+      radial-gradient(1px 1px at 85% 80%, white, transparent),
+      radial-gradient(1px 1px at 35% 85%, white, transparent),
+      radial-gradient(1.5px 1.5px at 65% 50%, white, transparent),
+      radial-gradient(1px 1px at 10% 60%, white, transparent),
+      radial-gradient(1px 1px at 95% 10%, white, transparent);
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle { from { opacity: 0.35; } to { opacity: 1; } }
+
+  @keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: 0.35 } }
+  .blink-dot { animation: blink 1.5s ease-in-out infinite; }
+
+  @keyframes hb { 0%,100%{transform:scale(1)} 25%{transform:scale(1.35)} 50%{transform:scale(1)} 75%{transform:scale(1.25)} }
+  .heart-beat { animation: hb .65s ease-in-out; }
+
+  @keyframes floatY { 0%,100%{ transform: translateY(0)} 50%{ transform: translateY(-6px)} }
+  .float-y { animation: floatY 6s ease-in-out infinite; }
+
+  .scrollbar-hidden::-webkit-scrollbar { display: none; }
+  .scrollbar-hidden { scrollbar-width: none; }
+</style>
+
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/framer-motion@11.3.19/dist/framer-motion.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="env,react">
+const { useState, useEffect, useMemo, useRef, useCallback } = React;
+const { motion, AnimatePresence } = window.framerMotion || window.FramerMotion || window["framer-motion"] || window.Motion || {};
+// Fallback: framer-motion exposes as window.Motion or motion through UMD
+const FM = window.Motion || window.framerMotion || window["framer-motion"] || {};
+const M = (FM.motion || motion);
+const AP = (FM.AnimatePresence || AnimatePresence);
+
+/* ============================== DATA ============================== */
+const PRESET_MEMBERS = [
+  { id:'papa',    name:'Papa Stranger',    emoji:'☕', role:'Doyen & Sagesse',          tagline:'Le café fume, la maison écoute.',         color:'from-amber-200 via-amber-100 to-stone-100' },
+  { id:'maman',   name:'Maman Stranger',   emoji:'☀️', role:'Cœur de la Maison',        tagline:'Le soleil entre par la fenêtre, c\'est elle.', color:'from-rose-200 via-orange-100 to-amber-100' },
+  { id:'yaya',    name:'Yaya',             emoji:'🎧', role:'Ambiance & Style',         tagline:'Casque vissé, vibes calibrées.',          color:'from-violet-200 via-indigo-100 to-blue-100' },
+  { id:'jemina',  name:'Jemina Stranger',  emoji:'🥑', role:'Créativité & Joie',        tagline:'Toast à l\'avocat, idée du jour.',        color:'from-emerald-200 via-lime-100 to-yellow-100' },
+  { id:'jeremie', name:'Jérémie Stranger', emoji:'🛫', role:'Aventures & Rêves',        tagline:'Sac à dos prêt, horizon à conquérir.',    color:'from-sky-200 via-cyan-100 to-blue-100' },
+  { id:'michael', name:'Michael Stranger', emoji:'⚽', role:'Vitalité & Dynamisme',     tagline:'Match en tête, énergie pleine.',          color:'from-orange-200 via-amber-100 to-red-100' },
+  { id:'moise',   name:'Moise Stranger',   emoji:'🎹', role:'Mélomane & Réflexion',     tagline:'Une note, une pensée, une nuance.',       color:'from-indigo-200 via-purple-100 to-pink-100' },
+  { id:'debora',  name:'Débora Stranger',  emoji:'🎨', role:'Art & Douceur',            tagline:'Pinceaux légers, cœur grand ouvert.',     color:'from-pink-200 via-rose-100 to-amber-100' },
+];
+const GUEST_EMOJIS = ['🍀','⭐','🍕','🌙','🦊','🐝','🍓','🪴','✨','🌻','🍑','🐧'];
+const UNIVERSAL_CODE = '018726354';
+
+const MOOD_OPTIONS = [
+  { emoji:'😌', label:'Serein' }, { emoji:'⚡', label:'Énergique' },
+  { emoji:'😴', label:'Fatigué' }, { emoji:'😄', label:'Joyeux' },
+  { emoji:'🤔', label:'Pensif' }, { emoji:'🥰', label:'Aimant' },
+  { emoji:'🎨', label:'Inspiré' }, { emoji:'🛫', label:'Aventureux' },
+  { emoji:'☕', label:'Cocooning' },
+];
+
+const FAMILY_CHARTER = [
+  { emoji:'🤝', title:'Solidarité', text:'On se soutient sans poser de questions, même quand le wifi est mauvais.' },
+  { emoji:'🍳', title:'Gourmandise', text:'Aucun secret ne vaut un dimanche brunch en famille.' },
+  { emoji:'🎶', title:'Bonne humeur', text:'Toujours une chanson sous le coude, même à 7h du matin.' },
+  { emoji:'🌿', title:'Respect', text:'Chacun cultive son jardin — et arrose celui des autres.' },
+  { emoji:'✨', title:'Complicité', text:'Les codes secrets, les blagues internes, les regards : c\'est notre langue.' },
+];
+
+const QUIZ = [
+  { q:'Quel est le plat préféré de Papa Stranger le dimanche ?', options:['Pizza maison','Poulet braisé','Sushi','Pâtes carbonara'], correct:1, fun:'☕ Ça embaume toute la maison dès 11h.' },
+  { q:'Quelle anecdote fait toujours rire à propos de Jérémie ?', options:['Il s\'est endormi dans un musée','Il a perdu son passeport en Autriche','Il a confondu deux pays','Il a oublié sa valise dans l\'avion'], correct:1, fun:'🛫 "Vienna, je reviens te chercher !" — Jérémie.' },
+  { q:'Qui prépare les meilleurs cookies de la maison ?', options:['Maman','Débora','Jemina','Yaya'], correct:2, fun:'🥑 Secret de Jemina : du sel de Guérande.' },
+  { q:'Quel instrument joue Moise le soir en cachette ?', options:['Guitare','Piano','Violoncelle','Harmonica'], correct:1, fun:'🎹 La maison s\'endort en Debussy.' },
+  { q:'Quel sport réunit Michael ET Yaya devant la télé ?', options:['Tennis','Basket','Football','Formule 1'], correct:2, fun:'⚽ Cris, popcorn et coussins.' },
+  { q:'Qui a peint l\'aquarelle de la véranda ?', options:['Maman','Débora','Une tante','Personne ne sait'], correct:1, fun:'🎨 Signée DS. en bas à droite.' },
+];
+
+/* ============================== SEED ============================== */
+const HOUR = 3600*1000, DAY = 24*HOUR;
+const now = Date.now();
+const SEED_TARGET = (() => {
+  const d = new Date(); d.setDate(d.getDate()+18); d.setHours(18,30,0,0);
+  return { title:'Grand Barbecue d\'Été Famille', date: d.toISOString(), emoji:'🔥' };
+})();
+const SEED_MOODS = [
+  { id:'m1', memberId:'papa',    memberName:'Papa Stranger',    emoji:'😌', label:'Serein',     message:'Café fumant, journal ouvert — la maison ronronne.', createdAt: now-2*HOUR, hugs:3 },
+  { id:'m2', memberId:'debora',  memberName:'Débora Stranger',  emoji:'🎨', label:'Inspirée',   message:'Une aquarelle pour la cuisine. Petit secret.',      createdAt: now-5*HOUR, hugs:5 },
+  { id:'m3', memberId:'jeremie', memberName:'Jérémie Stranger', emoji:'🛫', label:'Aventureux', message:'Je regarde encore des billets pour Lisbonne…',     createdAt: now-8*HOUR, hugs:2 },
+];
+const SEED_TASKS = [
+  { id:'t1', title:'Préparer la glacière bleue',      assignedTo:'papa',    done:false, category:'bagages' },
+  { id:'t2', title:'Acheter les marinades',           assignedTo:'maman',   done:true,  category:'courses' },
+  { id:'t3', title:'Apporter l\'enceinte Bluetooth',  assignedTo:'yaya',    done:false, category:'organisation' },
+  { id:'t4', title:'Cookies maison',                  assignedTo:'jemina',  done:false, category:'courses' },
+  { id:'t5', title:'Ballon de foot neuf',             assignedTo:'michael', done:false, category:'bagages' },
+  { id:'t6', title:'Playlist du barbecue',            assignedTo:'moise',   done:true,  category:'organisation' },
+];
+const SEED_EVENTS = (() => { const y = new Date().getFullYear(); return [
+  { id:'e1', title:'Anniversaire de Maman Stranger', date:`${y}-06-12`, emoji:'🎂', type:'birthday' },
+  { id:'e2', title:'Anniversaire de Jemina',          date:`${y}-09-04`, emoji:'🥑', type:'birthday' },
+  { id:'e3', title:'Anniversaire de Moise',           date:`${y}-11-22`, emoji:'🎹', type:'birthday' },
+  { id:'e4', title:'Brunch du dimanche',              date:`${y}-07-07`, emoji:'🥐', type:'gathering' },
+  { id:'e5', title:'Soirée cinéma maison',            date:`${y}-08-15`, emoji:'🎬', type:'gathering' },
+];})();
+const SEED_POSTS = [
+  { id:'p1', authorId:'debora', authorName:'Débora Stranger', authorEmoji:'🎨', title:'Une petite douceur du dimanche',
+    content:'J\'ai redécoré la véranda avec mes vieilles aquarelles. Venez voir, ça sent l\'enfance et la lavande. ✨',
+    imageUrl:'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=900&q=80', createdAt: now-6*HOUR },
+  { id:'p2', authorId:'papa', authorName:'Papa Stranger', authorEmoji:'☕', title:'Le café est en marche',
+    content:'Petit rappel familial : on ne touche pas à ma machine à café avant 7h du matin. Avec amour. — Papa.', createdAt: now-1*DAY },
+  { id:'p3', authorId:'yaya', authorName:'Yaya', authorEmoji:'🎧', title:'Playlist du week-end',
+    content:'J\'ai préparé une playlist nostalgie pour le road trip. Préparez vos oreilles — et vos voix pour le karaoké.',
+    imageUrl:'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&q=80', createdAt: now-2*DAY },
+];
+const SEED_PHOTOS = [
+  { id:'ph1', url:'https://images.unsplash.com/photo-1529778873920-4da4926a72c2?w=800&q=80', caption:'La grimace officielle de Michael après un penalty raté.', authorName:'Michael Stranger', authorEmoji:'⚽', likes:7, createdAt: now-3*DAY },
+  { id:'ph2', url:'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80', caption:'Brunch chaotique chez Jemina — l\'avocat a survécu, pas le pain.', authorName:'Jemina Stranger', authorEmoji:'🥑', likes:12, createdAt: now-4*DAY },
+  { id:'ph3', url:'https://images.unsplash.com/photo-1488161628813-04466f872be2?w=800&q=80', caption:'Jérémie en Autriche : "je promets, c\'est le dernier strudel".', authorName:'Jérémie Stranger', authorEmoji:'🛫', likes:9, createdAt: now-5*DAY },
+];
+const SEED_SONGS = [
+  { id:'s1', title:'Stand by Me', artist:'Ben E. King', link:'https://www.youtube.com/results?search_query=stand+by+me+ben+e+king',
+    reason:'Le morceau qu\'on chante tous en voiture — même faux.', suggestedBy:'Papa Stranger', suggestedByEmoji:'☕', votes:6, voters:['papa','maman'], createdAt: now-2*DAY },
+  { id:'s2', title:'Sunflower', artist:'Post Malone & Swae Lee', link:'https://www.youtube.com/results?search_query=sunflower+post+malone',
+    reason:'Hit officiel des road trips de l\'été dernier.', suggestedBy:'Yaya', suggestedByEmoji:'🎧', votes:4, voters:['yaya','jemina'], createdAt: now-1*DAY },
+  { id:'s3', title:'Clair de Lune', artist:'Claude Debussy', link:'https://www.youtube.com/results?search_query=clair+de+lune+debussy',
+    reason:'Pour les soirs où Moise se met au piano.', suggestedBy:'Moise Stranger', suggestedByEmoji:'🎹', votes:3, voters:['moise'], createdAt: now-3*DAY },
+];
+
+/* ============================== STORAGE HOOK ============================== */
+function useLocalStorage(key, initial) {
+  const [v, setV] = useState(() => {
+    try { const raw = localStorage.getItem(key); if (raw!==null) return JSON.parse(raw); } catch(e){}
+    return initial;
+  });
+  useEffect(() => { try { localStorage.setItem(key, JSON.stringify(v)); } catch(e){} }, [key, v]);
+  return [v, setV];
+}
+const SK = {
+  currentUser: 'shola:currentUser', customMembers: 'shola:customMembers',
+  moods: 'shola:moods', hugs: 'shola:hugs', tasks: 'shola:tasks',
+  events: 'shola:events', posts: 'shola:posts', photos: 'shola:photos',
+  songs: 'shola:songs', target: 'shola:target', quizBest: 'shola:quizBest',
+};
+
+/* ============================== UTIL ============================== */
+const fmtDate = (iso) => new Date(iso).toLocaleDateString('fr-FR', { day:'2-digit', month:'long' });
+const fmtDateLong = (iso) => new Date(iso).toLocaleDateString('fr-FR', { weekday:'long', day:'2-digit', month:'long', year:'numeric' });
+const fmtRel = (ts) => {
+  const d = Math.floor((Date.now()-ts)/1000);
+  if (d<60) return 'à l\'instant';
+  if (d<3600) return `il y a ${Math.floor(d/60)} min`;
+  if (d<86400) return `il y a ${Math.floor(d/3600)} h`;
+  return `il y a ${Math.floor(d/86400)} j`;
+};
+const uid = () => Math.random().toString(36).slice(2,10) + Date.now().toString(36);
+
+function classNames(...xs){ return xs.filter(Boolean).join(' '); }
+
+/* ============================== ICONS (inline SVG) ============================== */
+const I = {
+  eye: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>,
+  eyeOff: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>,
+  lock: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>,
+  sparkle: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>,
+  settings: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>,
+  plus: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>,
+  trash: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>,
+  heart: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>,
+  arrowUp: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>,
+  home: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+  news: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>,
+  game: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="2"/></svg>,
+  check: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>,
+  cake: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v2"/><path d="M12 8v2"/><path d="M17 8v2"/><path d="M7 4h.01"/><path d="M12 4h.01"/><path d="M17 4h.01"/></svg>,
+  music: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>,
+  camera: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>,
+  brain: (p) => <svg {...p} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/></svg>,
+};
+
+/* ============================== WEATHER (Open-Meteo, no key) ============================== */
+function useWeather() {
+  const [w, setW] = useState({ loading:true, temp:null, code:null, label:'…', city:'Maison' });
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        // Try geolocation, fallback to Paris
+        const getCoords = () => new Promise((res) => {
+          if (!navigator.geolocation) return res({ lat:48.8566, lon:2.3522, city:'Paris' });
+          navigator.geolocation.getCurrentPosition(
+            (p) => res({ lat:p.coords.latitude, lon:p.coords.longitude, city:'Ici' }),
+            () => res({ lat:48.8566, lon:2.3522, city:'Paris' }),
+            { timeout:3000 }
+          );
+        });
+        const { lat, lon, city } = await getCoords();
+        const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&timezone=auto`);
+        const j = await r.json();
+        if (!alive) return;
+        const code = j?.current?.weather_code ?? 0;
+        const temp = Math.round(j?.current?.temperature_2m ?? 0);
+        setW({ loading:false, temp, code, label: weatherLabel(code), city });
+      } catch(e) {
+        if (alive) setW({ loading:false, temp:null, code:null, label:'Ambiance maison', city:'Maison' });
+      }
+    })();
+    return () => { alive = false; };
+  }, []);
+  return w;
+}
+function weatherLabel(c) {
+  if (c===0) return 'Ciel dégagé';
+  if ([1,2].includes(c)) return 'Éclaircies';
+  if (c===3) return 'Nuageux';
+  if ([45,48].includes(c)) return 'Brumeux';
+  if ([51,53,55,56,57].includes(c)) return 'Bruine';
+  if ([61,63,65,80,81,82].includes(c)) return 'Pluvieux';
+  if ([71,73,75,77,85,86].includes(c)) return 'Neige';
+  if ([95,96,99].includes(c)) return 'Orageux';
+  return 'Doux';
+}
+function weatherEmoji(c, hour){
+  if (c==null) return '🌤️';
+  const night = hour<6 || hour>=20;
+  if (c===0) return night ? '🌙' : '☀️';
+  if ([1,2].includes(c)) return night ? '⛅' : '🌤️';
+  if (c===3) return '☁️';
+  if ([45,48].includes(c)) return '🌫️';
+  if ([51,53,55,56,57,61,63,65,80,81,82].includes(c)) return '🌧️';
+  if ([71,73,75,77,85,86].includes(c)) return '❄️';
+  if ([95,96,99].includes(c)) return '⛈️';
+  return '🌤️';
+}
+
+/* ============================== AUTH SCREEN ============================== */
+function AuthGate({ onAuth }) {
+  const [customMembers, setCustomMembers] = useLocalStorage(SK.customMembers, []);
+  const allMembers = [...PRESET_MEMBERS, ...customMembers];
+  const [selected, setSelected] = useState(null);
+  const [code, setCode] = useState('');
+  const [show, setShow] = useState(false);
+  const [err, setErr] = useState('');
+  const [shake, setShake] = useState(false);
+  const [adding, setAdding] = useState(false);
+  const [newName, setNewName] = useState('');
+  const [newEmoji, setNewEmoji] = useState(GUEST_EMOJIS[0]);
+
+  const submit = (e) => {
+    e?.preventDefault?.();
+    if (code === UNIVERSAL_CODE) {
+      onAuth(selected);
+    } else {
+      setErr('Mot de passe secret incorrect. Réessaie en chuchotant. 🤫');
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
+    }
+  };
+
+  const addCustom = () => {
+    if (!newName.trim()) return;
+    const m = { id:'guest_'+uid(), name:newName.trim(), emoji:newEmoji, role:'Invité de la maison', tagline:'Bienvenue à la table.', color:'from-cream-200 via-cream-100 to-sand-100', isCustom:true };
+    setCustomMembers([...customMembers, m]);
+    setAdding(false); setNewName(''); setNewEmoji(GUEST_EMOJIS[0]);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 overflow-y-auto">
+      <div className="absolute inset-0 sky-evening opacity-90" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/20 to-black/50" />
+      <div className="relative min-h-full flex items-center justify-center p-4 sm:p-8">
+        <M.div
+          initial={{ opacity:0, y:30, scale:0.96 }} animate={{ opacity:1, y:0, scale:1 }} transition={{ duration:0.6, ease:'easeOut' }}
+          className="w-full max-w-5xl rounded-[2rem] bg-white/85 backdrop-blur-xl border border-stone-200/70 shadow-2xl overflow-hidden"
+        >
+          <div className="px-6 sm:px-10 pt-8 pb-6 border-b border-stone-200/60 bg-gradient-to-br from-cream-50 to-cream-100">
+            <div className="flex items-center gap-3 text-xs text-slate2-700 font-mono-tab">
+              <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 blink-dot" />
+              MAISON SECRÈTE · ENTRÉE PRIVÉE
+            </div>
+            <h1 className="title-serif text-3xl sm:text-5xl font-bold text-slate2-900 mt-2">Famille <span className="text-royal-600">SHOLA STRANGER</span></h1>
+            <p className="text-slate2-700 mt-2 max-w-xl">Qui se connecte ? Choisis ton profil, glisse le code secret de la maison, et installe-toi près du feu.</p>
+          </div>
+
+          {!selected && (
+            <div className="p-6 sm:p-10">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                {allMembers.map((m, i) => (
+                  <M.button key={m.id}
+                    initial={{ opacity:0, y:14 }} animate={{ opacity:1, y:0 }} transition={{ delay:i*0.04, duration:0.4 }}
+                    whileHover={{ y:-4, scale:1.02 }} whileTap={{ scale:0.97 }}
+                    onClick={() => setSelected(m)}
+                    className={`group relative overflow-hidden rounded-3xl p-4 sm:p-5 text-left bg-gradient-to-br ${m.color} border border-white/60 shadow-cozy min-h-[140px]`}>
+                    <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-white/40 blur-2xl" />
+                    <div className="text-3xl sm:text-4xl">{m.emoji}</div>
+                    <div className="mt-2 title-serif text-lg sm:text-xl font-semibold text-slate2-900 leading-tight">{m.name}</div>
+                    <div className="text-[11px] sm:text-xs font-mono-tab text-slate2-700/80 mt-1">{m.role}</div>
+                    <div className="text-xs text-slate2-700/90 italic mt-1 line-clamp-2">{m.tagline}</div>
+                  </M.button>
+                ))}
+
+                <M.button initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:allMembers.length*0.04 }}
+                  whileHover={{ y:-4 }} whileTap={{ scale:0.97 }}
+                  onClick={() => setAdding(true)}
+                  className="rounded-3xl border-2 border-dashed border-stone-300 text-slate2-700 p-5 flex flex-col items-center justify-center gap-2 hover:border-royal-400 hover:text-royal-600 hover:bg-white/70 transition-all min-h-[140px]">
+                  <I.plus />
+                  <div className="text-sm font-medium">Ajouter un invité</div>
+                  <div className="text-[11px] font-mono-tab opacity-70">Nom + emoji</div>
+                </M.button>
+              </div>
+
+              <AP>
+                {adding && (
+                  <M.div initial={{ opacity:0, height:0 }} animate={{ opacity:1, height:'auto' }} exit={{ opacity:0, height:0 }}
+                    className="mt-5 rounded-3xl border border-stone-200/70 bg-cream-50 p-5">
+                    <div className="title-serif text-xl text-slate2-900 mb-3">Nouveau visage à la table</div>
+                    <div className="grid sm:grid-cols-[1fr_auto] gap-3">
+                      <input value={newName} onChange={(e)=>setNewName(e.target.value)} placeholder="Prénom de l'invité" className="w-full px-4 py-3 rounded-2xl bg-white border border-stone-200/70 focus:outline-none focus:ring-2 focus:ring-royal-400/40 min-h-[44px]" />
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {GUEST_EMOJIS.map(e => (
+                          <button key={e} onClick={()=>setNewEmoji(e)} className={`w-10 h-10 rounded-2xl text-xl flex items-center justify-center border transition ${newEmoji===e?'bg-royal-500 text-white border-royal-500 scale-110':'bg-white border-stone-200 hover:border-royal-300'}`}>{e}</button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex gap-2 mt-4">
+                      <button onClick={addCustom} className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-royal-500 text-white hover:bg-royal-600 min-h-[44px]"><I.check /> Ajouter</button>
+                      <button onClick={()=>setAdding(false)} className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border border-stone-200 hover:bg-stone-50 min-h-[44px]">Annuler</button>
+                    </div>
+                  </M.div>
+                )}
+              </AP>
+            </div>
+          )}
+
+          {selected && (
+            <M.div initial={{ opacity:0 }} animate={{ opacity:1 }} className="p-6 sm:p-10">
+              <button onClick={()=>{setSelected(null); setCode(''); setErr('');}} className="text-sm text-slate2-700 hover:text-royal-600 font-mono-tab mb-4">← changer de profil</button>
+              <M.div animate={shake?{x:[0,-10,10,-8,8,0]}:{x:0}} transition={{duration:0.5}} className={`rounded-3xl bg-gradient-to-br ${selected.color} p-6 sm:p-8 border border-white/70 shadow-cozy`}>
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-white/70 flex items-center justify-center text-4xl sm:text-5xl shadow-soft">{selected.emoji}</div>
+                  <div>
+                    <div className="title-serif text-2xl sm:text-3xl font-bold text-slate2-900">{selected.name}</div>
+                    <div className="text-xs sm:text-sm font-mono-tab text-slate2-700/80">{selected.role}</div>
+                  </div>
+                </div>
+
+                <form onSubmit={submit} className="mt-6">
+                  <label className="flex items-center gap-2 text-sm text-slate2-800 font-medium mb-2"><I.lock /> Code secret de la maison</label>
+                  <div className="relative">
+                    <input
+                      autoFocus
+                      type={show?'text':'password'}
+                      value={code}
+                      onChange={(e)=>{setCode(e.target.value); setErr('');}}
+                      inputMode="numeric"
+                      placeholder="• • • • • • • • •"
+                      className="w-full px-4 py-4 pr-12 rounded-2xl bg-white/90 border border-stone-200 text-lg font-mono-tab tracking-[0.4em] focus:outline-none focus:ring-2 focus:ring-royal-400/40 min-h-[52px]"
+                    />
+                    <button type="button" onClick={()=>setShow(s=>!s)} aria-label="Afficher le code" className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-xl text-slate2-700 hover:bg-white">
+                      {show ? <I.eyeOff /> : <I.eye />}
+                    </button>
+                  </div>
+                  <div className="text-[11px] font-mono-tab text-slate2-700/70 mt-2">Astuce maison · 9 chiffres, dans l'ordre du four au congélateur.</div>
+                  <AP>
+                    {err && (
+                      <M.div initial={{opacity:0,y:-6}} animate={{opacity:1,y:0}} exit={{opacity:0}} className="mt-3 rounded-2xl bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm">
+                        ⚠️ {err}
+                      </M.div>
+                    )}
+                  </AP>
+                  <button type="submit" className="mt-5 w-full inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-royal-500 text-white font-medium hover:bg-royal-600 active:scale-[0.98] transition shadow-soft min-h-[52px]">
+                    <I.sparkle /> Entrer dans la maison
+                  </button>
+                </form>
+              </M.div>
+            </M.div>
+          )}
+
+          <div className="px-6 sm:px-10 py-4 border-t border-stone-200/60 bg-cream-50 text-[11px] font-mono-tab text-slate2-700/70 flex items-center justify-between">
+            <span>v1.0 · maison-secrete · offline-first</span>
+            <span>Aucun envoi externe · données dans ce navigateur</span>
+          </div>
+        </M.div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================== HEADER ============================== */
+function Header({ user, onChange, tab, setTab }) {
+  return (
+    <header className="sticky top-0 z-30 backdrop-blur-xl bg-cream-50/80 border-b border-stone-200/60">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-royal-500 to-royal-700 flex items-center justify-center text-white text-xl shadow-soft">🏡</div>
+          <div className="leading-tight">
+            <div className="title-serif font-bold text-slate2-900 text-base sm:text-lg">Famille <span className="text-royal-600">SHOLA STRANGER</span></div>
+            <div className="text-[10px] sm:text-[11px] font-mono-tab text-slate2-700/70">maison secrète · hub privé</div>
+          </div>
+        </div>
+
+        {/* Desktop tabs */}
+        <nav className="hidden md:flex items-center gap-1 bg-white/70 border border-stone-200/70 rounded-2xl p-1">
+          {TABS.map(t => (
+            <button key={t.id} onClick={()=>setTab(t.id)}
+              className={`relative px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2 transition ${tab===t.id?'text-white':'text-slate2-700 hover:text-slate2-900'}`}>
+              {tab===t.id && <M.div layoutId="tabbg" className="absolute inset-0 bg-royal-500 rounded-xl shadow-soft" transition={{type:'spring',stiffness:300,damping:30}} />}
+              <span className="relative flex items-center gap-2">{t.icon}{t.label}</span>
+            </button>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-2xl bg-white/70 border border-stone-200/70">
+            <span className="text-xl">{user.emoji}</span>
+            <div className="text-right leading-tight">
+              <div className="text-xs font-medium text-slate2-900 max-w-[140px] truncate">{user.name}</div>
+              <div className="text-[10px] font-mono-tab text-emerald-700 flex items-center gap-1 justify-end"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 blink-dot" /> connecté</div>
+            </div>
+          </div>
+          <button onClick={onChange} aria-label="Changer de profil" className="inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/70 border border-stone-200/70 hover:bg-white text-sm text-slate2-800 min-h-[44px]">
+            <I.settings /> <span className="hidden sm:inline">Changer</span>
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+const TABS = [
+  { id:'qg',     label:'Quartier Général',  icon: <I.home /> },
+  { id:'salon',  label:'Salon Virtuel',     icon: <I.news /> },
+  { id:'jeu',    label:'Terrain de Jeu',    icon: <I.game /> },
+];
+
+/* ============================== BOTTOM NAV (mobile) ============================== */
+function BottomNav({ tab, setTab }) {
+  return (
+    <nav className="md:hidden fixed bottom-0 inset-x-0 z-30 backdrop-blur-xl bg-cream-50/90 border-t border-stone-200/60 px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+      <div className="grid grid-cols-3 gap-1">
+        {TABS.map(t => (
+          <button key={t.id} onClick={()=>setTab(t.id)} className={`relative flex flex-col items-center justify-center gap-1 py-2 rounded-2xl min-h-[52px] transition ${tab===t.id?'text-royal-600 bg-white shadow-soft':'text-slate2-700'}`}>
+            <div>{t.icon}</div>
+            <div className="text-[10px] font-medium">{t.label.split(' ')[0]}</div>
+            {tab===t.id && <M.div layoutId="bottomdot" className="absolute -top-1 w-8 h-1 rounded-full bg-royal-500" />}
+          </button>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
+/* ============================== QG : CLOCK & WEATHER ============================== */
+function ClockWeather() {
+  const [now, setNow] = useState(new Date());
+  useEffect(() => { const t = setInterval(()=>setNow(new Date()), 1000); return ()=>clearInterval(t); }, []);
+  const w = useWeather();
+  const h = now.getHours();
+  const skyClass = h<6 ? 'sky-night stars' : h<9 ? 'sky-morning' : h<18 ? 'sky-day' : h<20 ? 'sky-evening' : 'sky-night stars';
+  const greet = h<6 ? 'Nuit douce' : h<12 ? 'Bonjour la maison' : h<18 ? 'Bel après-midi' : h<22 ? 'Bonne soirée' : 'Bonne nuit';
+  const dayName = now.toLocaleDateString('fr-FR', { weekday:'long', day:'2-digit', month:'long' });
+  const time = now.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+  const sec = now.getSeconds();
+  return (
+    <div className={`relative overflow-hidden rounded-3xl ${skyClass} p-6 sm:p-8 border border-white/40 shadow-soft text-slate2-900`}>
+      <div className="absolute -right-10 -top-10 w-44 h-44 rounded-full bg-white/40 blur-3xl" />
+      <div className="absolute right-6 top-6 text-5xl sm:text-6xl float-y">{weatherEmoji(w.code, h)}</div>
+      <div className="relative">
+        <div className="text-xs font-mono-tab uppercase tracking-widest opacity-80">{greet}</div>
+        <div className="title-serif text-5xl sm:text-7xl font-bold mt-1 leading-none">{time}</div>
+        <div className="mt-1 text-sm sm:text-base capitalize opacity-90">{dayName}</div>
+        <div className="mt-4 flex items-center gap-3 flex-wrap">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/60 backdrop-blur text-sm font-medium border border-white/70">
+            {w.loading ? '…' : `${w.temp}°C · ${w.label}`}
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/60 backdrop-blur text-xs font-mono-tab border border-white/70">📍 {w.city}</span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/60 backdrop-blur text-xs font-mono-tab border border-white/70">{String(sec).padStart(2,'0')}″</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================== QG : COMPASS COUNTDOWN ============================== */
+function Countdown({ target }) {
+  const [now, setNow] = useState(Date.now());
+  useEffect(() => { const t = setInterval(()=>setNow(Date.now()),1000); return ()=>clearInterval(t); }, []);
+  const diff = Math.max(0, new Date(target.date).getTime() - now);
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  const cells = [{l:'jours',v:d},{l:'heures',v:h},{l:'minutes',v:m},{l:'secondes',v:s}];
+  return (
+    <div className="grid grid-cols-4 gap-2 sm:gap-3">
+      {cells.map((c,i)=>(
+        <div key={i} className="rounded-2xl bg-white/80 border border-stone-200/70 px-2 py-3 text-center">
+          <div className="title-serif text-2xl sm:text-3xl font-bold text-royal-600 tabular-nums">{String(c.v).padStart(2,'0')}</div>
+          <div className="text-[10px] sm:text-xs font-mono-tab text-slate2-700/70 uppercase">{c.l}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CompassWidget({ allMembers }) {
+  const [target, setTarget] = useLocalStorage(SK.target, SEED_TARGET);
+  const [tasks, setTasks] = useLocalStorage(SK.tasks, SEED_TASKS);
+  const [editing, setEditing] = useState(false);
+  const [newTask, setNewTask] = useState({ title:'', assignedTo: allMembers[0]?.id || 'papa', category:'organisation' });
+
+  const toggle = (id) => setTasks(tasks.map(t => t.id===id?{...t,done:!t.done}:t));
+  const remove = (id) => setTasks(tasks.filter(t => t.id!==id));
+  const add = () => {
+    if (!newTask.title.trim()) return;
+    setTasks([{ id:uid(), title:newTask.title.trim(), assignedTo:newTask.assignedTo, category:newTask.category, done:false }, ...tasks]);
+    setNewTask({ ...newTask, title:'' });
+  };
+
+  const memberOf = (id) => allMembers.find(m=>m.id===id) || { name:'Famille', emoji:'👨‍👩‍👧‍👦' };
+  const catBadge = { bagages:'🧳 bagages', courses:'🛒 courses', organisation:'🗒️ organisation' };
+
+  return (
+    <div className="card-soft rounded-3xl p-5 sm:p-6 bg-white/70 backdrop-blur-md border border-stone-200/60 shadow-soft">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <div className="text-xs font-mono-tab text-slate2-700/70 uppercase tracking-widest">La Boussole des Retrouvailles</div>
+          {!editing ? (
+            <div className="title-serif text-2xl sm:text-3xl font-bold mt-1">{target.emoji} {target.title}</div>
+          ) : (
+            <div className="mt-2 grid gap-2">
+              <input value={target.title} onChange={(e)=>setTarget({...target, title:e.target.value})} className="px-3 py-2 rounded-xl bg-white border border-stone-200 text-lg title-serif" />
+              <div className="flex gap-2">
+                <input type="datetime-local" value={target.date.slice(0,16)} onChange={(e)=>setTarget({...target, date:new Date(e.target.value).toISOString()})} className="px-3 py-2 rounded-xl bg-white border border-stone-200 text-sm" />
+                <input value={target.emoji} onChange={(e)=>setTarget({...target, emoji:e.target.value})} maxLength={2} className="w-14 text-center text-xl px-2 py-2 rounded-xl bg-white border border-stone-200" />
+              </div>
+            </div>
+          )}
+          <div className="text-sm text-slate2-700 mt-1">{fmtDateLong(target.date)}</div>
+        </div>
+        <button onClick={()=>setEditing(e=>!e)} className="text-xs px-3 py-2 rounded-xl bg-cream-100 border border-stone-200 hover:bg-cream-50">{editing?'✓ Ok':'✎ Modifier'}</button>
+      </div>
+
+      <div className="mt-4"><Countdown target={target} /></div>
+
+      <div className="mt-5">
+        <div className="flex items-center justify-between mb-2">
+          <div className="text-sm font-semibold text-slate2-900">Tâches à se partager</div>
+          <div className="text-[11px] font-mono-tab text-slate2-700/60">{tasks.filter(t=>t.done).length}/{tasks.length} prêtes</div>
+        </div>
+        <div className="space-y-2">
+          <AP initial={false}>
+            {tasks.map(t => {
+              const m = memberOf(t.assignedTo);
+              return (
+                <M.div key={t.id} layout initial={{opacity:0,y:6}} animate={{opacity:1,y:0}} exit={{opacity:0,x:-20}}
+                  className={`group flex items-center gap-3 rounded-2xl px-3 py-2.5 border ${t.done?'bg-emerald-50/60 border-emerald-200/70':'bg-white/80 border-stone-200/70'}`}>
+                  <button onClick={()=>toggle(t.id)} className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition ${t.done?'bg-emerald-500 border-emerald-500 text-white':'border-stone-300 hover:border-royal-400'}`}>
+                    {t.done && <I.check />}
+                  </button>
+                  <div className="flex-1 min-w-0">
+                    <div className={`text-sm font-medium ${t.done?'line-through text-slate2-700/60':'text-slate2-900'} truncate`}>{t.title}</div>
+                    <div className="text-[11px] font-mono-tab text-slate2-700/70 flex items-center gap-2 flex-wrap">
+                      <span>{catBadge[t.category]}</span>
+                      <span className="opacity-60">·</span>
+                      <span>{m.emoji} {m.name}</span>
+                    </div>
+                  </div>
+                  <button onClick={()=>remove(t.id)} className="p-2 rounded-xl text-slate2-700/50 hover:text-red-500 hover:bg-red-50 transition opacity-0 group-hover:opacity-100"><I.trash /></button>
+                </M.div>
+              );
+            })}
+          </AP>
+        </div>
+
+        <div className="mt-3 grid sm:grid-cols-[1fr_auto_auto_auto] gap-2">
+          <input value={newTask.title} onChange={(e)=>setNewTask({...newTask,title:e.target.value})} placeholder="Une nouvelle mission…" className="px-3 py-2.5 rounded-2xl bg-white border border-stone-200 text-sm min-h-[44px]" />
+          <select value={newTask.assignedTo} onChange={(e)=>setNewTask({...newTask,assignedTo:e.target.value})} className="px-3 py-2.5 rounded-2xl bg-white border border-stone-200 text-sm min-h-[44px]">
+            {allMembers.map(m=><option key={m.id} value={m.id}>{m.emoji} {m.name}</option>)}
+          </select>
+          <select value={newTask.category} onChange={(e)=>setNewTask({...newTask,category:e.target.value})} className="px-3 py-2.5 rounded-2xl bg-white border border-stone-200 text-sm min-h-[44px]">
+            <option value="organisation">🗒️ Organisation</option>
+            <option value="bagages">🧳 Bagages</option>
+            <option value="courses">🛒 Courses</option>
+          </select>
+          <button onClick={add} className="inline-flex items-center justify-center gap-1 px-4 py-2.5 rounded-2xl bg-royal-500 text-white hover:bg-royal-600 text-sm min-h-[44px]"><I.plus /> Ajouter</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================== QG : MOOD BOARD ============================== */
+function MoodBoard({ user }) {
+  const [moods, setMoods] = useLocalStorage(SK.moods, SEED_MOODS);
+  const [hugStats, setHugStats] = useLocalStorage(SK.hugs, { sent:0, received:0 });
+  const [emoji, setEmoji] = useState(MOOD_OPTIONS[3].emoji);
+  const [label, setLabel] = useState(MOOD_OPTIONS[3].label);
+  const [msg, setMsg] = useState('');
+  const [hugBeat, setHugBeat] = useState({});
+
+  const post = () => {
+    if (!msg.trim()) return;
+    const newM = { id:uid(), memberId:user.id, memberName:user.name, emoji, label, message:msg.trim(), createdAt:Date.now(), hugs:0 };
+    setMoods([newM, ...moods]);
+    setMsg('');
+  };
+  const hug = (id) => {
+    setMoods(moods.map(m => m.id===id ? { ...m, hugs:m.hugs+1 } : m));
+    setHugStats({ ...hugStats, sent: hugStats.sent+1 });
+    setHugBeat({ ...hugBeat, [id]: Date.now() });
+    setTimeout(() => setHugBeat(prev => { const c = {...prev}; delete c[id]; return c; }), 700);
+  };
+  const remove = (id) => setMoods(moods.filter(m=>m.id!==id));
+
+  return (
+    <div className="card-soft rounded-3xl p-5 sm:p-6 bg-white/70 backdrop-blur-md border border-stone-200/60 shadow-soft">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <div className="text-xs font-mono-tab text-slate2-700/70 uppercase tracking-widest">Le Tableau des Humeurs</div>
+          <div className="title-serif text-2xl sm:text-3xl font-bold mt-1">Comment ça va, vraiment ?</div>
+        </div>
+        <div className="text-right">
+          <div className="text-[11px] font-mono-tab text-slate2-700/60">câlins envoyés</div>
+          <div className="title-serif text-2xl font-bold text-rose-600 flex items-center gap-1 justify-end">❤️ {hugStats.sent}</div>
+        </div>
+      </div>
+
+      <div className="mt-4 rounded-2xl bg-cream-50 border border-stone-200/70 p-4">
+        <div className="flex items-center gap-2 flex-wrap">
+          {MOOD_OPTIONS.map(o => (
+            <button key={o.label} onClick={()=>{setEmoji(o.emoji); setLabel(o.label);}}
+              className={`px-3 py-2 rounded-2xl text-sm flex items-center gap-2 border transition ${emoji===o.emoji?'bg-royal-500 text-white border-royal-500':'bg-white border-stone-200 hover:border-royal-300'}`}>
+              <span className="text-lg">{o.emoji}</span> {o.label}
+            </button>
+          ))}
+        </div>
+        <div className="mt-3 grid sm:grid-cols-[1fr_auto] gap-2">
+          <input value={msg} onChange={(e)=>setMsg(e.target.value)} placeholder="Ton message secret du jour…" className="px-4 py-3 rounded-2xl bg-white border border-stone-200 min-h-[44px]" />
+          <button onClick={post} className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-royal-500 text-white hover:bg-royal-600 min-h-[44px]"><I.sparkle /> Publier</button>
+        </div>
+      </div>
+
+      <div className="mt-4 space-y-2">
+        <AP initial={false}>
+          {moods.map(m => (
+            <M.div key={m.id} layout initial={{opacity:0,y:6}} animate={{opacity:1,y:0}} exit={{opacity:0,x:-20}}
+              className="group rounded-2xl bg-white border border-stone-200/70 p-3 sm:p-4 flex items-start gap-3">
+              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-cream-100 to-sand-100 flex items-center justify-center text-2xl">{m.emoji}</div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  <div className="font-semibold text-slate2-900">{m.memberName}</div>
+                  <div className="text-xs font-mono-tab text-royal-600">{m.label}</div>
+                  <div className="text-[11px] font-mono-tab text-slate2-700/50">· {fmtRel(m.createdAt)}</div>
+                </div>
+                <div className="text-sm text-slate2-700 mt-1 leading-relaxed">{m.message}</div>
+              </div>
+              <div className="flex items-center gap-1">
+                <button onClick={()=>hug(m.id)} className="inline-flex items-center gap-1 px-3 py-2 rounded-2xl bg-rose-50 hover:bg-rose-100 text-rose-600 text-sm border border-rose-200 min-h-[40px]">
+                  <span className={hugBeat[m.id]?'heart-beat inline-block':''}>❤️</span>
+                  <span className="font-mono-tab tabular-nums">{m.hugs}</span>
+                </button>
+                {m.memberId===user.id && (
+                  <button onClick={()=>remove(m.id)} className="p-2 rounded-xl text-slate2-700/50 hover:text-red-500 hover:bg-red-50 transition opacity-0 group-hover:opacity-100"><I.trash /></button>
+                )}
+              </div>
+            </M.div>
+          ))}
+        </AP>
+        {moods.length===0 && <div className="text-sm text-slate2-700/60 italic text-center py-6">Personne n'a partagé d'humeur. Inaugure le tableau ✨</div>}
+      </div>
+    </div>
+  );
+}
+
+/* ============================== QG : CALENDAR ============================== */
+function FamilyCalendar() {
+  const [events, setEvents] = useLocalStorage(SK.events, SEED_EVENTS);
+  const [n, setN] = useState({ title:'', date:'', emoji:'🎉', type:'gathering' });
+  const sorted = [...events].sort((a,b) => {
+    const aa = new Date(a.date), bb = new Date(b.date);
+    return aa.getMonth()===bb.getMonth() ? aa.getDate()-bb.getDate() : aa.getMonth()-bb.getMonth();
+  });
+  const today = new Date();
+  const nextUp = sorted.find(e => {
+    const d = new Date(e.date); d.setFullYear(today.getFullYear());
+    return d >= today;
+  });
+  const add = () => {
+    if (!n.title.trim() || !n.date) return;
+    setEvents([{ id:uid(), title:n.title.trim(), date:n.date, emoji:n.emoji, type:n.type }, ...events]);
+    setN({ title:'', date:'', emoji:'🎉', type:'gathering' });
+  };
+  const remove = (id) => setEvents(events.filter(e=>e.id!==id));
+  return (
+    <div className="card-soft rounded-3xl p-5 sm:p-6 bg-white/70 backdrop-blur-md border border-stone-200/60 shadow-soft">
+      <div className="flex items-center justify-between gap-3 mb-1">
+        <div>
+          <div className="text-xs font-mono-tab text-slate2-700/70 uppercase tracking-widest">Le Calendrier de Famille</div>
+          <div className="title-serif text-2xl sm:text-3xl font-bold mt-1">Rendez-vous de la tribu</div>
+        </div>
+        {nextUp && <span className="chip bg-royal-50 border-royal-100 text-royal-700">⏭ Prochain · {nextUp.emoji} {nextUp.title}</span>}
+      </div>
+
+      <div className="mt-4 grid sm:grid-cols-2 gap-2">
+        {sorted.map(e => (
+          <div key={e.id} className="group rounded-2xl bg-white border border-stone-200/70 p-3 flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-cream-100 to-sand-100 flex items-center justify-center text-xl">{e.emoji}</div>
+            <div className="flex-1 min-w-0">
+              <div className="font-medium text-slate2-900 truncate">{e.title}</div>
+              <div className="text-[11px] font-mono-tab text-slate2-700/70 flex items-center gap-1.5">
+                <I.cake /> {fmtDate(e.date)} · <span className="capitalize">{e.type==='birthday'?'anniversaire':e.type==='gathering'?'rassemblement':'événement'}</span>
+              </div>
+            </div>
+            <button onClick={()=>remove(e.id)} className="p-2 rounded-xl text-slate2-700/40 hover:text-red-500 hover:bg-red-50 opacity-0 group-hover:opacity-100"><I.trash /></button>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 rounded-2xl bg-cream-50 border border-stone-200/70 p-3 grid sm:grid-cols-[1fr_auto_auto_auto_auto] gap-2">
+        <input value={n.title} onChange={(e)=>setN({...n,title:e.target.value})} placeholder="Nouvel événement…" className="px-3 py-2.5 rounded-2xl bg-white border border-stone-200 text-sm min-h-[44px]" />
+        <input type="date" value={n.date} onChange={(e)=>setN({...n,date:e.target.value})} className="px-3 py-2.5 rounded-2xl bg-white border border-stone-200 text-sm min-h-[44px]" />
+        <input value={n.emoji} onChange={(e)=>setN({...n,emoji:e.target.value})} maxLength={2} className="w-14 text-center px-2 py-2.5 rounded-2xl bg-white border border-stone-200 text-lg min-h-[44px]" />
+        <select value={n.type} onChange={(e)=>setN({...n,type:e.target.value})} className="px-3 py-2.5 rounded-2xl bg-white border border-stone-200 text-sm min-h-[44px]">
+          <option value="gathering">Rassemblement</option>
+          <option value="birthday">Anniversaire</option>
+          <option value="custom">Autre</option>
+        </select>
+        <button onClick={add} className="inline-flex items-center justify-center gap-1 px-4 py-2.5 rounded-2xl bg-royal-500 text-white hover:bg-royal-600 text-sm min-h-[44px]"><I.plus /></button>
+      </div>
+    </div>
+  );
+}
+
+/* ============================== TAB: QG ============================== */
+function TabQG({ user, allMembers }) {
+  return (
+    <M.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-10}} transition={{duration:0.35}}
+      className="grid lg:grid-cols-12 gap-4 sm:gap-5">
+      <div className="lg:col-span-7 space-y-4 sm:space-y-5">
+        <ClockWeather />
+        <CompassWidget allMembers={allMembers} />
+      </div>
+      <div className="lg:col-span-5 space-y-4 sm:space-y-5">
+        <MoodBoard user={user} />
+        <FamilyCalendar />
+      </div>
+    </M.div>
+  );
+}
+
+/* ============================== TAB: SALON (Posts) ============================== */
+function TabSalon({ user }) {
+  const [posts, setPosts] = useLocalStorage(SK.posts, SEED_POSTS);
+  const [open, setOpen] = useState(false);
+  const [draft, setDraft] = useState({ title:'', content:'', imageUrl:'' });
+  const publish = () => {
+    if (!draft.title.trim() || !draft.content.trim()) return;
+    setPosts([{ id:uid(), authorId:user.id, authorName:user.name, authorEmoji:user.emoji, title:draft.title.trim(), content:draft.content.trim(), imageUrl:draft.imageUrl.trim()||undefined, createdAt:Date.now() }, ...posts]);
+    setDraft({ title:'', content:'', imageUrl:'' }); setOpen(false);
+  };
+  const remove = (id) => setPosts(posts.filter(p=>p.id!==id));
+
+  return (
+    <M.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-10}} transition={{duration:0.35}}
+      className="grid lg:grid-cols-12 gap-4 sm:gap-5">
+      <div className="lg:col-span-8 space-y-4">
+        <div className="card-soft rounded-3xl p-5 sm:p-6 bg-white/70 border border-stone-200/60 shadow-soft">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <div className="text-xs font-mono-tab text-slate2-700/70 uppercase tracking-widest">Gazette & Fil de Vie</div>
+              <div className="title-serif text-2xl sm:text-3xl font-bold mt-1">Le Salon Virtuel</div>
+            </div>
+            <button onClick={()=>setOpen(o=>!o)} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-royal-500 text-white hover:bg-royal-600 min-h-[44px]"><I.plus /> Publier</button>
+          </div>
+          <AP>
+            {open && (
+              <M.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}} className="mt-4 rounded-2xl bg-cream-50 border border-stone-200/70 p-4 space-y-2 overflow-hidden">
+                <input value={draft.title} onChange={(e)=>setDraft({...draft,title:e.target.value})} placeholder="Titre du souvenir…" className="w-full px-4 py-3 rounded-2xl bg-white border border-stone-200 min-h-[44px]" />
+                <textarea value={draft.content} onChange={(e)=>setDraft({...draft,content:e.target.value})} placeholder="Raconte ton histoire à la maisonnée…" rows={4} className="w-full px-4 py-3 rounded-2xl bg-white border border-stone-200" />
+                <input value={draft.imageUrl} onChange={(e)=>setDraft({...draft,imageUrl:e.target.value})} placeholder="Lien image (optionnel · ex: unsplash.com/...)" className="w-full px-4 py-3 rounded-2xl bg-white border border-stone-200 text-sm font-mono-tab min-h-[44px]" />
+                <div className="flex gap-2 pt-1">
+                  <button onClick={publish} className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-royal-500 text-white hover:bg-royal-600 min-h-[44px]"><I.sparkle /> Publier</button>
+                  <button onClick={()=>setOpen(false)} className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border border-stone-200 min-h-[44px]">Annuler</button>
+                </div>
+              </M.div>
+            )}
+          </AP>
+        </div>
+
+        <div className="space-y-4">
+          <AP initial={false}>
+            {posts.map(p => (
+              <M.article key={p.id} layout initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0,x:-20}}
+                className="group card-soft rounded-3xl bg-white/80 border border-stone-200/60 shadow-soft overflow-hidden">
+                {p.imageUrl && (
+                  <div className="relative h-48 sm:h-64 overflow-hidden">
+                    <img src={p.imageUrl} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  </div>
+                )}
+                <div className="p-5 sm:p-6">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-cream-100 to-sand-100 flex items-center justify-center text-2xl shrink-0">{p.authorEmoji}</div>
+                      <div className="min-w-0">
+                        <div className="font-semibold text-slate2-900 truncate">{p.authorName}</div>
+                        <div className="text-[11px] font-mono-tab text-slate2-700/60">{fmtRel(p.createdAt)}</div>
+                      </div>
+                    </div>
+                    {p.authorId===user.id && (
+                      <button onClick={()=>remove(p.id)} className="p-2 rounded-xl text-slate2-700/50 hover:text-red-500 hover:bg-red-50 transition"><I.trash /></button>
+                    )}
+                  </div>
+                  <h3 className="title-serif text-2xl font-bold text-slate2-900 mt-3">{p.title}</h3>
+                  <p className="text-slate2-700 mt-2 leading-relaxed whitespace-pre-wrap">{p.content}</p>
+                </div>
+              </M.article>
+            ))}
+          </AP>
+          {posts.length===0 && <div className="text-center text-slate2-700/60 italic py-10">Le salon est calme. Ouvre la conversation 🕯️</div>}
+        </div>
+      </div>
+
+      <aside className="lg:col-span-4 lg:sticky lg:top-20 self-start space-y-4">
+        <div className="rounded-3xl p-6 bg-gradient-to-br from-royal-500 to-royal-700 text-white shadow-soft border border-white/10 relative overflow-hidden">
+          <div className="absolute -right-12 -top-12 w-40 h-40 rounded-full bg-white/10 blur-3xl" />
+          <div className="text-[11px] font-mono-tab uppercase tracking-widest opacity-80">Charte de Notre Famille</div>
+          <div className="title-serif text-2xl font-bold mt-1">Notre langage commun</div>
+          <div className="mt-4 space-y-3">
+            {FAMILY_CHARTER.map(c => (
+              <div key={c.title} className="flex gap-3">
+                <div className="w-9 h-9 rounded-2xl bg-white/15 flex items-center justify-center text-lg shrink-0">{c.emoji}</div>
+                <div>
+                  <div className="font-semibold text-sm">{c.title}</div>
+                  <div className="text-xs text-white/80 leading-relaxed">{c.text}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 pt-4 border-t border-white/20 text-[11px] font-mono-tab text-white/70 italic">— Signé : tous les Stranger ✨</div>
+        </div>
+      </aside>
+    </M.div>
+  );
+}
+
+/* ============================== TAB: TERRAIN DE JEU ============================== */
+function TabJeu({ user }) {
+  const [sub, setSub] = useState('quiz');
+  const subs = [
+    { id:'quiz',   label:'Trivia',   icon: <I.brain />,  color:'from-amber-200 to-orange-100' },
+    { id:'photo',  label:'Photos',   icon: <I.camera />, color:'from-rose-200 to-pink-100' },
+    { id:'music',  label:'Playlist', icon: <I.music />,  color:'from-indigo-200 to-violet-100' },
+  ];
+  return (
+    <M.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-10}} transition={{duration:0.35}} className="space-y-5">
+      <div className="card-soft rounded-3xl p-4 bg-white/70 border border-stone-200/60 shadow-soft flex items-center gap-2 overflow-x-auto scrollbar-hidden">
+        {subs.map(s => (
+          <button key={s.id} onClick={()=>setSub(s.id)} className={`relative flex items-center gap-2 px-4 py-2.5 rounded-2xl text-sm font-medium whitespace-nowrap transition ${sub===s.id?'text-slate2-900':'text-slate2-700/70 hover:text-slate2-900'}`}>
+            {sub===s.id && <M.div layoutId="subbg" className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${s.color} border border-white shadow-soft`} transition={{type:'spring',stiffness:300,damping:30}} />}
+            <span className="relative flex items-center gap-2">{s.icon} {s.label}</span>
+          </button>
+        ))}
+      </div>
+      <AP mode="wait">
+        {sub==='quiz' && <Quiz key="q" user={user} />}
+        {sub==='photo' && <Photos key="p" user={user} />}
+        {sub==='music' && <Playlist key="m" user={user} />}
+      </AP>
+    </M.div>
+  );
+}
+
+function Quiz({ user }) {
+  const [idx, setIdx] = useState(0);
+  const [score, setScore] = useState(0);
+  const [picked, setPicked] = useState(null);
+  const [best, setBest] = useLocalStorage(SK.quizBest, {});
+  const done = idx >= QUIZ.length;
+
+  const choose = (i) => {
+    if (picked!==null) return;
+    setPicked(i);
+    if (i === QUIZ[idx].correct) setScore(s => s+1);
+    setTimeout(() => { setPicked(null); setIdx(x => x+1); }, 1100);
+  };
+  const reset = () => { setIdx(0); setScore(0); setPicked(null); };
+
+  useEffect(() => {
+    if (done) {
+      const prev = best[user.id] ?? 0;
+      if (score > prev) setBest({ ...best, [user.id]: score });
+    }
+  }, [done]);
+
+  const congrats = () => {
+    const pct = (score/QUIZ.length)*100;
+    if (pct===100) return `${user.emoji} Sans-faute, ${user.name} ! Tu connais cette maison par cœur.`;
+    if (pct>=70)   return `${user.emoji} Bravo ${user.name}, tu as l'oreille fine de la famille.`;
+    if (pct>=40)   return `${user.emoji} Pas mal, ${user.name}, encore quelques anecdotes à creuser.`;
+    return `${user.emoji} Doucement, ${user.name}, retourne discuter au salon ☕`;
+  };
+
+  return (
+    <M.div initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-8}}
+      className="card-soft rounded-3xl p-5 sm:p-7 bg-white/70 border border-stone-200/60 shadow-soft">
+      <div className="flex items-center justify-between gap-3 mb-3">
+        <div>
+          <div className="text-xs font-mono-tab text-slate2-700/70 uppercase tracking-widest">Trivia de Famille</div>
+          <div className="title-serif text-2xl sm:text-3xl font-bold mt-1">Anecdotes maison</div>
+        </div>
+        <div className="text-right">
+          <div className="text-[11px] font-mono-tab text-slate2-700/60">meilleur score</div>
+          <div className="title-serif text-2xl font-bold">{best[user.id] ?? 0}<span className="text-slate2-700/50">/{QUIZ.length}</span></div>
+        </div>
+      </div>
+
+      {!done ? (
+        <>
+          <div className="h-1.5 rounded-full bg-stone-200 overflow-hidden mb-4">
+            <M.div className="h-full bg-royal-500" initial={false} animate={{ width: `${(idx/QUIZ.length)*100}%` }} transition={{ type:'spring', stiffness:120, damping:20 }} />
+          </div>
+          <div className="text-[11px] font-mono-tab text-slate2-700/60 mb-2">QUESTION {idx+1} / {QUIZ.length}</div>
+          <M.h3 key={idx} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} className="title-serif text-xl sm:text-2xl font-bold text-slate2-900 mb-4">{QUIZ[idx].q}</M.h3>
+          <div className="grid sm:grid-cols-2 gap-2">
+            {QUIZ[idx].options.map((opt, i) => {
+              const correct = i === QUIZ[idx].correct;
+              const isPicked = picked === i;
+              const reveal = picked !== null;
+              const cls = reveal
+                ? (correct ? 'bg-emerald-50 border-emerald-300 text-emerald-800' : (isPicked ? 'bg-red-50 border-red-300 text-red-700' : 'bg-white border-stone-200 opacity-60'))
+                : 'bg-white border-stone-200 hover:border-royal-400 hover:bg-royal-50';
+              return (
+                <M.button key={i} whileHover={{ y:reveal?0:-2 }} whileTap={{ scale:0.98 }} disabled={reveal} onClick={()=>choose(i)}
+                  className={`text-left px-4 py-3 rounded-2xl border transition min-h-[52px] ${cls}`}>
+                  <div className="text-sm font-medium">{opt}</div>
+                </M.button>
+              );
+            })}
+          </div>
+          <AP>
+            {picked!==null && (
+              <M.div initial={{opacity:0,y:6}} animate={{opacity:1,y:0}} exit={{opacity:0}} className="mt-3 text-xs font-mono-tab text-slate2-700/80 italic">{QUIZ[idx].fun}</M.div>
+            )}
+          </AP>
+        </>
+      ) : (
+        <M.div initial={{opacity:0,scale:0.96}} animate={{opacity:1,scale:1}} className="text-center py-6">
+          <div className="text-6xl mb-3">{score===QUIZ.length?'🏆':score>=4?'🎉':'☕'}</div>
+          <div className="title-serif text-3xl sm:text-4xl font-bold text-slate2-900">{score}<span className="text-slate2-700/50">/{QUIZ.length}</span></div>
+          <p className="text-slate2-700 mt-3 max-w-md mx-auto">{congrats()}</p>
+          <button onClick={reset} className="mt-5 inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-royal-500 text-white hover:bg-royal-600 min-h-[44px]"><I.sparkle /> Rejouer</button>
+        </M.div>
+      )}
+    </M.div>
+  );
+}
+
+function Photos({ user }) {
+  const [photos, setPhotos] = useLocalStorage(SK.photos, SEED_PHOTOS);
+  const [open, setOpen] = useState(false);
+  const [n, setN] = useState({ url:'', caption:'' });
+  const [beat, setBeat] = useState({});
+  const like = (id) => {
+    setPhotos(photos.map(p => p.id===id ? { ...p, likes: p.likes+1 } : p));
+    setBeat({ ...beat, [id]: Date.now() });
+    setTimeout(() => setBeat(prev => { const c = {...prev}; delete c[id]; return c; }), 700);
+  };
+  const submit = () => {
+    if (!n.url.trim() || !n.caption.trim()) return;
+    setPhotos([{ id:uid(), url:n.url.trim(), caption:n.caption.trim(), authorName:user.name, authorEmoji:user.emoji, likes:0, createdAt:Date.now() }, ...photos]);
+    setN({ url:'', caption:'' }); setOpen(false);
+  };
+  const remove = (id) => setPhotos(photos.filter(p=>p.id!==id));
+
+  return (
+    <M.div initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-8}}
+      className="card-soft rounded-3xl p-5 sm:p-6 bg-white/70 border border-stone-200/60 shadow-soft">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <div className="text-xs font-mono-tab text-slate2-700/70 uppercase tracking-widest">Défi Photo du Moment</div>
+          <div className="title-serif text-2xl sm:text-3xl font-bold mt-1">Galerie des grimaces</div>
+        </div>
+        <button onClick={()=>setOpen(o=>!o)} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-royal-500 text-white hover:bg-royal-600 min-h-[44px]"><I.camera /> Soumettre</button>
+      </div>
+
+      <AP>
+        {open && (
+          <M.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}} className="mt-3 rounded-2xl bg-cream-50 border border-stone-200/70 p-4 space-y-2 overflow-hidden">
+            <input value={n.url} onChange={(e)=>setN({...n,url:e.target.value})} placeholder="URL de la photo (ex: unsplash.com/...)" className="w-full px-4 py-3 rounded-2xl bg-white border border-stone-200 font-mono-tab text-sm min-h-[44px]" />
+            <input value={n.caption} onChange={(e)=>setN({...n,caption:e.target.value})} placeholder="La légende qui tue" className="w-full px-4 py-3 rounded-2xl bg-white border border-stone-200 min-h-[44px]" />
+            <div className="flex gap-2"><button onClick={submit} className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-royal-500 text-white hover:bg-royal-600 min-h-[44px]"><I.check /> Publier</button><button onClick={()=>setOpen(false)} className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border border-stone-200 min-h-[44px]">Annuler</button></div>
+          </M.div>
+        )}
+      </AP>
+
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+        <AP initial={false}>
+          {photos.map(p => (
+            <M.div key={p.id} layout initial={{opacity:0,scale:0.95}} animate={{opacity:1,scale:1}} exit={{opacity:0,scale:0.9}}
+              className="group relative rounded-3xl overflow-hidden bg-white border border-stone-200/70 shadow-soft">
+              <div className="relative h-52 overflow-hidden">
+                <img src={p.url} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
+                  <div className="text-[11px] font-mono-tab opacity-80">{p.authorEmoji} {p.authorName}</div>
+                  <div className="text-sm font-medium leading-tight mt-0.5 line-clamp-2">{p.caption}</div>
+                </div>
+              </div>
+              <div className="flex items-center justify-between p-3">
+                <button onClick={()=>like(p.id)} className="inline-flex items-center gap-2 px-3 py-2 rounded-2xl bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 min-h-[40px]">
+                  <span className={beat[p.id]?'heart-beat inline-block':''}>❤️</span>
+                  <span className="font-mono-tab tabular-nums text-sm">{p.likes}</span>
+                </button>
+                <button onClick={()=>remove(p.id)} className="p-2 rounded-xl text-slate2-700/40 hover:text-red-500 hover:bg-red-50 opacity-0 group-hover:opacity-100"><I.trash /></button>
+              </div>
+            </M.div>
+          ))}
+        </AP>
+      </div>
+      {photos.length===0 && <div className="text-center text-slate2-700/60 italic py-8">Pas encore de grimace immortalisée…</div>}
+    </M.div>
+  );
+}
+
+function Playlist({ user }) {
+  const [songs, setSongs] = useLocalStorage(SK.songs, SEED_SONGS);
+  const [open, setOpen] = useState(false);
+  const [n, setN] = useState({ title:'', artist:'', link:'', reason:'' });
+  const sorted = [...songs].sort((a,b) => b.votes - a.votes);
+  const vote = (id) => {
+    setSongs(songs.map(s => {
+      if (s.id !== id) return s;
+      const voted = s.voters.includes(user.id);
+      return { ...s, votes: voted ? s.votes-1 : s.votes+1, voters: voted ? s.voters.filter(x=>x!==user.id) : [...s.voters, user.id] };
+    }));
+  };
+  const submit = () => {
+    if (!n.title.trim() || !n.artist.trim()) return;
+    setSongs([{ id:uid(), title:n.title.trim(), artist:n.artist.trim(), link:n.link.trim(), reason:n.reason.trim(), suggestedBy:user.name, suggestedByEmoji:user.emoji, votes:1, voters:[user.id], createdAt:Date.now() }, ...songs]);
+    setN({ title:'', artist:'', link:'', reason:'' }); setOpen(false);
+  };
+  const remove = (id) => setSongs(songs.filter(s=>s.id!==id));
+
+  return (
+    <M.div initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-8}}
+      className="card-soft rounded-3xl p-5 sm:p-6 bg-white/70 border border-stone-200/60 shadow-soft">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <div className="text-xs font-mono-tab text-slate2-700/70 uppercase tracking-widest">Boîte à Musique du Salon</div>
+          <div className="title-serif text-2xl sm:text-3xl font-bold mt-1">Playlist complice</div>
+        </div>
+        <button onClick={()=>setOpen(o=>!o)} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-royal-500 text-white hover:bg-royal-600 min-h-[44px]"><I.music /> Proposer</button>
+      </div>
+
+      <AP>
+        {open && (
+          <M.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}} className="mt-3 rounded-2xl bg-cream-50 border border-stone-200/70 p-4 space-y-2 overflow-hidden">
+            <div className="grid sm:grid-cols-2 gap-2">
+              <input value={n.title} onChange={(e)=>setN({...n,title:e.target.value})} placeholder="Titre" className="px-4 py-3 rounded-2xl bg-white border border-stone-200 min-h-[44px]" />
+              <input value={n.artist} onChange={(e)=>setN({...n,artist:e.target.value})} placeholder="Artiste" className="px-4 py-3 rounded-2xl bg-white border border-stone-200 min-h-[44px]" />
+            </div>
+            <input value={n.link} onChange={(e)=>setN({...n,link:e.target.value})} placeholder="Lien streaming (optionnel)" className="w-full px-4 py-3 rounded-2xl bg-white border border-stone-200 font-mono-tab text-sm min-h-[44px]" />
+            <input value={n.reason} onChange={(e)=>setN({...n,reason:e.target.value})} placeholder="Raison / souvenir lié au morceau" className="w-full px-4 py-3 rounded-2xl bg-white border border-stone-200 min-h-[44px]" />
+            <div className="flex gap-2"><button onClick={submit} className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-royal-500 text-white hover:bg-royal-600 min-h-[44px]"><I.check /> Ajouter</button><button onClick={()=>setOpen(false)} className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border border-stone-200 min-h-[44px]">Annuler</button></div>
+          </M.div>
+        )}
+      </AP>
+
+      <div className="mt-5 space-y-2">
+        <AP initial={false}>
+          {sorted.map((s, i) => {
+            const voted = s.voters.includes(user.id);
+            return (
+              <M.div key={s.id} layout initial={{opacity:0,y:6}} animate={{opacity:1,y:0}} exit={{opacity:0,x:-20}}
+                className="group flex items-center gap-3 rounded-2xl bg-white border border-stone-200/70 p-3 sm:p-4">
+                <div className="title-serif text-2xl sm:text-3xl font-bold text-slate2-700/30 w-8 text-center tabular-nums">{i+1}</div>
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-200 to-violet-100 flex items-center justify-center text-xl shadow-soft">🎵</div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    {s.link ? (
+                      <a href={s.link} target="_blank" rel="noreferrer" className="font-semibold text-slate2-900 hover:text-royal-600 truncate">{s.title}</a>
+                    ) : (
+                      <div className="font-semibold text-slate2-900 truncate">{s.title}</div>
+                    )}
+                    <div className="text-xs text-slate2-700/70">· {s.artist}</div>
+                  </div>
+                  {s.reason && <div className="text-xs text-slate2-700 mt-1 italic line-clamp-2">« {s.reason} »</div>}
+                  <div className="text-[11px] font-mono-tab text-slate2-700/60 mt-1">{s.suggestedByEmoji} {s.suggestedBy}</div>
+                </div>
+                <div className="flex items-center gap-1">
+                  <button onClick={()=>vote(s.id)} className={`inline-flex items-center gap-1 px-3 py-2 rounded-2xl border min-h-[40px] transition ${voted?'bg-royal-500 text-white border-royal-500':'bg-white text-slate2-800 border-stone-200 hover:border-royal-400'}`}>
+                    <I.arrowUp /> <span className="font-mono-tab tabular-nums text-sm">{s.votes}</span>
+                  </button>
+                  {s.voters.includes(user.id) && (
+                    <button onClick={()=>remove(s.id)} className="p-2 rounded-xl text-slate2-700/40 hover:text-red-500 hover:bg-red-50 opacity-0 group-hover:opacity-100"><I.trash /></button>
+                  )}
+                </div>
+              </M.div>
+            );
+          })}
+        </AP>
+      </div>
+      {sorted.length===0 && <div className="text-center text-slate2-700/60 italic py-8">Le tourne-disque attend ta première suggestion…</div>}
+    </M.div>
+  );
+}
+
+/* ============================== APP ROOT ============================== */
+function App() {
+  const [user, setUser] = useLocalStorage(SK.currentUser, null);
+  const [customMembers] = useLocalStorage(SK.customMembers, []);
+  const allMembers = useMemo(() => [...PRESET_MEMBERS, ...customMembers], [customMembers]);
+  const [tab, setTab] = useState('qg');
+
+  const handleAuth = (member) => {
+    setUser({ id: member.id, name: member.name, emoji: member.emoji, role: member.role, isCustom: !!member.isCustom });
+  };
+  const handleChange = () => setUser(null);
+
+  // smooth scroll to top on tab change
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }, [tab]);
+
+  return (
+    <div className="min-h-full pb-24 md:pb-10">
+      <AP>
+        {!user && <AuthGate key="auth" onAuth={handleAuth} />}
+      </AP>
+
+      {user && (
+        <>
+          <Header user={user} onChange={handleChange} tab={tab} setTab={setTab} />
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 py-5 sm:py-8">
+            <AP mode="wait">
+              {tab==='qg'    && <TabQG    key="qg"    user={user} allMembers={allMembers} />}
+              {tab==='salon' && <TabSalon key="salon" user={user} />}
+              {tab==='jeu'   && <TabJeu   key="jeu"   user={user} />}
+            </AP>
+            <footer className="mt-10 text-center text-[11px] font-mono-tab text-slate2-700/50">
+              maison-secrete · données dans ce navigateur · made with ❤️ pour la famille SHOLA STRANGER
+            </footer>
+          </main>
+          <BottomNav tab={tab} setTab={setTab} />
+        </>
+      )}
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
