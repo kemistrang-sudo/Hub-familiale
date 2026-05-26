@@ -1,379 +1,325 @@
-import { useState, useEffect, useCallback } from "react";
-
-const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-.hub{min-height:100vh;background:#fdf8f0;font-family:'DM Sans',system-ui,sans-serif;color:#1c1917;font-size:14px}
-.serif{font-family:'Lora',Georgia,serif}
-.card{background:#fff;border:1px solid #e5e0d8;border-radius:16px;padding:20px 24px}
-.btn-pri{background:#d97706;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-weight:500;cursor:pointer;font-size:13px;transition:.15s;font-family:inherit}
-.btn-pri:hover{background:#b45309}.btn-pri:active{transform:scale(.98)}
-.btn-out{background:transparent;color:#d97706;border:1.5px solid #d97706;border-radius:10px;padding:8px 14px;font-weight:500;cursor:pointer;font-size:12px;transition:.15s;font-family:inherit}
-.btn-out:hover{background:#fffbeb}
-.btn-g{background:transparent;border:none;cursor:pointer;color:#78716c;font-size:13px;transition:.15s;padding:5px 8px;border-radius:8px;font-family:inherit}
-.btn-g:hover{background:#f5f0e8;color:#1c1917}
-.inp{width:100%;border:1px solid #e5e0d8;border-radius:10px;padding:10px 14px;font-size:13px;background:#fdf8f0;outline:none;transition:.15s;font-family:inherit;color:#1c1917}
-.inp:focus{border-color:#d97706;background:#fff}
-.tab{padding:9px 18px;border-radius:12px;border:none;background:transparent;color:#78716c;cursor:pointer;font-size:13px;font-weight:500;transition:.15s;white-space:nowrap;display:flex;align-items:center;gap:6px;font-family:inherit}
-.tab:hover{background:rgba(255,255,255,.5);color:#1c1917}
-.tab.on{background:#fff;color:#1c1917;box-shadow:0 1px 4px rgba(0,0,0,.1)}
-.ovl{position:fixed;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;z-index:100}
-.modal{background:#fff;border-radius:20px;padding:28px;width:90%;max-width:480px;max-height:85vh;overflow-y:auto}
-.pbg{height:6px;background:#e5e0d8;border-radius:99px;overflow:hidden}
-.pbar{height:100%;background:#d97706;border-radius:99px;transition:width .4s}
-.tri-q{background:#fef3c7;border:1px solid #fde68a;border-radius:14px;padding:20px;font-style:italic;line-height:1.6;font-size:15px}
-.tri-opt{width:100%;background:#fff;border:1.5px solid #e5e0d8;border-radius:10px;padding:13px 18px;text-align:left;cursor:pointer;font-size:13px;font-family:inherit;color:#1c1917;transition:.15s}
-.tri-opt:hover:not([disabled]){border-color:#d97706;background:#fffbeb}
-.tri-opt.ok{border-color:#16a34a!important;background:#f0fdf4!important;color:#166534!important}
-.tri-opt.ko{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}
-.salon{background:linear-gradient(135deg,#1e3a8a,#6d28d9,#d97706);border-radius:20px;padding:40px;color:#fff}
-.salon-btn{background:#fff;border:none;border-radius:12px;padding:14px 28px;font-weight:600;cursor:pointer;font-size:14px;color:#1e3a8a;display:flex;align-items:center;gap:8px;transition:.2s;font-family:inherit}
-.salon-btn:hover{transform:scale(1.04)}
-.avi{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;flex-shrink:0}
-.chk{width:18px;height:18px;border-radius:5px;border:2px solid #e5e0d8;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;background:#fff}
-.chk.on{background:#d97706;border-color:#d97706}
-.mbr-card{border:2px solid transparent;border-radius:14px;padding:14px 10px;cursor:pointer;text-align:center;transition:all .2s}
-.mbr-card:hover{border-color:#d97706;transform:translateY(-2px)}
-.login-screen{position:fixed;inset:0;background:#fdf8f0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;z-index:200;padding:20px 16px;overflow-y:auto}
-@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.fi{animation:fi .3s ease}
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-`;
-
-const FAMILY = [
-  {id:"papa",name:"Papa Stranger",emoji:"☕",role:"Doyen de la bande, serviteur de Dieu, médite la bible, aime la musique",initials:"PS",col:{bg:"#fef3c7",c:"#92400e"}},
-  {id:"maman",name:"Maman Stranger",emoji:"☀️",role:"Le cœur logistique et l'organisatrice en chef de la maison",initials:"MS",col:{bg:"#fce7f3",c:"#9d174d"}},
-  {id:"yaya",name:"Yaya",emoji:"🎧",role:"La manager, influenceuse et créatrice de style",initials:"YA",col:{bg:"#f3e8ff",c:"#6b21a8"}},
-  {id:"jemina",name:"Jemina Stranger",emoji:"🥑",role:"La juriste fiscaliste communicative et pro du quiz",initials:"JM",col:{bg:"#dcfce7",c:"#166534"}},
-  {id:"jeremie",name:"Jérémie Stranger",emoji:"🛫",role:"L'ingénieur en industrie et globe-trotteur officiel",initials:"JR",col:{bg:"#dbeafe",c:"#1e40af"}},
-  {id:"michael",name:"Michael Stranger",emoji:"⚽",role:"L'expert de l'objectif et footballeur en devenir",initials:"MC",col:{bg:"#d1fae5",c:"#065f46"}},
-  {id:"moise",name:"Moise Stranger",emoji:"🎹",role:"L'artiste et scientifique super-perfectionniste",initials:"MO",col:{bg:"#fee2e2",c:"#991b1b"}},
-  {id:"debora",name:"Débora Stranger",emoji:"🎨",role:"La dernière en quête du sens et tiktokeuse",initials:"DB",col:{bg:"#fef9c3",c:"#854d0d"}},
-];
-
-const AVCOLS = [
-  {bg:"#fef3c7",c:"#92400e"},{bg:"#dcfce7",c:"#166534"},{bg:"#dbeafe",c:"#1e40af"},
-  {bg:"#fce7f3",c:"#9d174d"},{bg:"#f3e8ff",c:"#6b21a8"},{bg:"#d1fae5",c:"#065f46"},
-  {bg:"#fee2e2",c:"#991b1b"},{bg:"#fef9c3",c:"#854d0d"}
-];
-
-const CITIES = [
-  {name:"Paris",tz:"Europe/Paris",flag:"🗼"},
-  {name:"Montréal",tz:"America/Toronto",flag:"🍁"},
-  {name:"Libreville",tz:"Africa/Libreville",flag:"🌿"},
-  {name:"Dakar",tz:"Africa/Dakar",flag:"🌊"}
-];
-
-const INIT = {
-  events:[
-    {id:1,title:"Anniversaire de Maman Stranger",date:"2026-12-28",member:"Maman Stranger"},
-    {id:2,title:"Appel Meet familial dominical",date:"2026-06-01",member:"Tous"},
-    {id:3,title:"Retour de Jérémie de Tokyo",date:"2026-06-08",member:"Jérémie Stranger"},
-    {id:4,title:"Départ vacances d'été SHOLA",date:"2026-07-15",member:"Tous"},
-  ],
-  reminders:[
-    {id:1,text:"Envoyer les photos du weekend au groupe familial",done:false},
-    {id:2,text:"Jemina : préparer la playlist pour les vacances 🎵",done:false},
-    {id:3,text:"Michael : organiser le match de foot avant le départ ⚽",done:false},
-    {id:4,text:"Moise : apporter la partition du nouveau morceau 🎹",done:true},
-  ],
-  projects:[
-    {id:1,title:"Vacances d'Été SHOLA 🌴",desc:"Trouver une grande maison pour loger toute la smala au soleil",
-     tasks:[{id:1,text:"Fixer la semaine définitive de départ",done:true},{id:2,text:"Estimer le budget par foyer",done:false},{id:3,text:"Sélectionner les 3 meilleures annonces Airbnb",done:false}],
-     inspirations:[{id:1,title:"Villa en Ardèche avec piscine",url:"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&q=80",desc:"Grande piscine, 8 chambres"},{id:2,title:"Gîte de charme dans le Périgord",url:"https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=400&q=80",desc:"Très calme, proche des grottes"}]},
-    {id:2,title:"Livre de Recettes Stranger 📖",desc:"Compiler les secrets culinaires de Papa et Maman Stranger pour la postérité",
-     tasks:[{id:1,text:"Photographier la sauce secrète de Maman Stranger",done:false},{id:2,text:"Demander la recette de terrine de Papa Stranger",done:false}],
-     inspirations:[{id:1,title:"Le Clafoutis de Mamie Ginette",url:"https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&q=80",desc:"La recette originale de 1974"}]},
-  ],
-  trivia:[
-    {id:1,q:"En quelle ville Jérémie a-t-il perdu son passeport lors de son premier voyage solo ?",answers:["À Amsterdam","À Bangkok","À Dubai"],correct:1,anecdote:"C'était à Bangkok en 2022 ! L'ambassade de France a dû intervenir d'urgence 😅 Il ne l'oubliera plus jamais."},
-    {id:2,q:"Quelle chanson Papa Stranger chante-t-il systématiquement sous la douche le matin ?",answers:["Un cantique gospel","Une chanson de Fally Ipupa","La Marseillaise"],correct:0,anecdote:"Un cantique évidemment ! Papa ne démarre pas sa journée sans sa louange matinale ☕🙏"},
-    {id:3,q:"Combien de followers Yaya avait-elle lors de son premier reel viral ?",answers:["500 followers","2 000 followers","10 000 followers"],correct:1,anecdote:"2 000 followers en une nuit avec son premier reel mode ! Et maintenant regardez-la 🎧🔥"},
-    {id:4,q:"Quel instrument Moise a-t-il appris à jouer entièrement seul, sans professeur ?",answers:["La guitare","Le piano","La batterie"],correct:1,anecdote:"Le piano ! Autodidacte et perfectionniste, il a maîtrisé des morceaux classiques en quelques mois 🎹✨"},
-  ],
-  photos:[
-    {id:1,author:"Yaya",url:"https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",desc:"Ma grimace influenceuse du dimanche 🐪🎧",votes:8,date:"2026-05-24",voted:false},
-    {id:2,author:"Michael",url:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=600&q=80",desc:"Quand tu rates ton penalty mais tu fais genre ⚽😂",votes:5,date:"2026-05-23",voted:false},
-    {id:3,author:"Débora",url:"https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80",desc:"POV : tiktokeuse cherche son meilleur angle 🎨📸",votes:3,date:"2026-05-22",voted:false},
-  ],
-  posts:[
-    {id:1,author:"Jérémie Stranger",initials:"JR",date:"2026-05-24T19:30:00",content:"Coucou la famille depuis Tokyo ! Le décalage horaire me tue mais la ville est incroyable. J'ai trouvé un ramen à 2h du matin qui ferait pleurer Papa Stranger tellement c'est bon. Mon vol retour est le 8 juin, je rapporte des cadeaux pour tout le monde ! On s'appelle dimanche ? 🛫🇯🇵",imgUrl:"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80"},
-    {id:2,author:"Maman Stranger",initials:"MS",date:"2026-05-23T11:15:00",content:"Rappel à toute la troupe : l'appel Meet ce dimanche est avancé à 15h00 (heure de Paris) pour s'adapter au vol de Jérémie. Préparez vos anecdotes de la semaine ! Débora, pas de filtre Snapchat cette fois 😄 Bisous à tous mes enfants. ☀️",imgUrl:null},
-    {id:3,author:"Moise Stranger",initials:"MO",date:"2026-05-22T16:45:00",content:"J'ai enfin terminé la composition que je peaufinais depuis 3 mois. C'est une pièce pour piano et violoncelle, je vous la joue lors des prochaines retrouvailles. Jemina, j'ai besoin de tes oreilles critiques pour le mixage final 🎹✨",imgUrl:null},
-  ],
-};
-
-const CHARTER = [
-  "Partager au moins un souvenir drôle chaque semaine.",
-  "Publier une photo de notre quotidien dans la gazette régulièrement.",
-  "S'amuser et proposer de nouvelles questions de Quiz loufoques !",
-  "Prendre soin les uns des autres, peu importe le fuseau horaire."
-];
-
-const FMEMBERS = FAMILY.map(f => f.name);
-const TABS = [
-  { id: "quartier", label: "Quartier Général", icon: "🏠" },
-  { id: "idees", label: "Boîte à Idées", icon: "💡" },
-  { id: "jeu", label: "Terrain de Jeu", icon: "🎮" },
-  { id: "vie", label: "Fil de Vie", icon: "📸" },
-];
-
-// CORRECTION 1: Utilisation correcte de localStorage
-const ws = typeof window !== "undefined" ? window.localStorage : null;
-
-function useStorage(key, init) {
-  const [v, setV] = useState(init);
-  const k = `shola_${key}`;
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Famille SHOLA STRANGER</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+    *{box-sizing:border-box;margin:0;padding:0}
+    .hub{min-height:100vh;background:#fdf8f0;font-family:'DM Sans',system-ui,sans-serif;color:#1c1917;font-size:14px}
+    .serif{font-family:'Lora',Georgia,serif}
+    .card{background:#fff;border:1px solid #e5e0d8;border-radius:16px;padding:20px 24px}
+    .btn-pri{background:#d97706;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-weight:500;cursor:pointer;font-size:13px;transition:.15s;font-family:inherit}
+    .btn-pri:hover{background:#b45309}.btn-pri:active{transform:scale(.98)}
+    .btn-out{background:transparent;color:#d97706;border:1.5px solid #d97706;border-radius:10px;padding:8px 14px;font-weight:500;cursor:pointer;font-size:12px;transition:.15s;font-family:inherit}
+    .btn-out:hover{background:#fffbeb}
+    .btn-g{background:transparent;border:none;cursor:pointer;color:#78716c;font-size:13px;transition:.15s;padding:5px 8px;border-radius:8px;font-family:inherit}
+    .btn-g:hover{background:#f5f0e8;color:#1c1917}
+    .inp{width:100%;border:1px solid #e5e0d8;border-radius:10px;padding:10px 14px;font-size:13px;background:#fdf8f0;outline:none;transition:.15s;font-family:inherit;color:#1c1917}
+    .inp:focus{border-color:#d97706;background:#fff}
+    .tab{padding:9px 18px;border-radius:12px;border:none;background:transparent;color:#78716c;cursor:pointer;font-size:13px;font-weight:500;transition:.15s;white-space:nowrap;display:flex;align-items:center}
+    .tab:hover{background:rgba(255,255,255,.5);color:#1c1917}
+    .tab.on{background:#fff;color:#1c1917;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+    .ovl{position:fixed;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;z-index:100}
+    .modal{background:#fff;border-radius:20px;padding:28px;width:90%;max-width:480px;max-height:85vh;overflow-y:auto}
+    .pbg{height:6px;background:#e5e0d8;border-radius:99px;overflow:hidden}
+    .pbar{height:100%;background:#d97706;border-radius:99px;transition:width .4s}
+    .tri-q{background:#fef3c7;border:1px solid #fde68a;border-radius:14px;padding:20px;font-style:italic;line-height:1.6;font-size:15px}
+    .tri-opt{width:100%;background:#fff;border:1.5px solid #e5e0d8;border-radius:10px;padding:13px 18px;text-align:left;cursor:pointer;font-size:13px;font-family:inherit;color:#1c1917;transition:.15s}
+    .tri-opt:hover:not([disabled]){border-color:#d97706;background:#fffbeb}
+    .tri-opt.ok{border-color:#16a34a!important;background:#f0fdf4!important;color:#166534!important}
+    .tri-opt.ko{border-color:#dc2626!important;background:#fef2f2!important;color:#991b1b!important}
+    .salon{background:linear-gradient(135deg,#1e3a8a,#6d28d9,#d97706);border-radius:20px;padding:40px;color:#fff}
+    .salon-btn{background:#fff;border:none;border-radius:12px;padding:14px 28px;font-weight:600;cursor:pointer;font-size:14px;color:#1e3a8a;display:flex;align-items:center;gap:8px;transition:.2s;font-family:inherit}
+    .salon-btn:hover{transform:scale(1.04)}
+    .avi{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;flex-shrink:0}
+    .chk{width:18px;height:18px;border-radius:5px;border:2px solid #e5e0d8;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;background:#fff}
+    .chk.on{background:#d97706;border-color:#d97706}
+    .mbr-card{border:2px solid transparent;border-radius:14px;padding:14px 10px;cursor:pointer;text-align:center;transition:all .2s}
+    .mbr-card:hover{border-color:#d97706;transform:translateY(-2px)}
+    .login-screen{position:fixed;inset:0;background:#fdf8f0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;z-index:200;padding:20px 16px;overflow-y:auto}
+    @keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .fi{animation:fi .3s ease}
+    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div id="root"></div>
   
-  useEffect(() => {
-    if (!ws) return;
-    const raw = ws.getItem(k);
-    if (raw) {
-      try { 
-        setV(JSON.parse(raw)); 
-      } catch(_) {}
-    }
-  }, [k]);
-  
-  const set = useCallback((val) => {
-    setV(prev => {
-      const n = typeof val === "function" ? val(prev) : val;
-      if (ws) ws.setItem(k, JSON.stringify(n));
-      return n;
-    });
-  }, [k]);
-  
-  return [v, set];
-}
+  <script type="text/babel">
+    const { useState, useEffect, useCallback } = React;
 
-// CORRECTION 2: useClock optimisé sans fuite mémoire
-function useClock() {
-  const [t, setT] = useState({});
-  
-  useEffect(() => {
-    const tick = () => {
-      const now = new Date();
-      const times = {};
-      CITIES.forEach(({ name, tz }) => {
-        const p = new Intl.DateTimeFormat("fr-FR", { 
-          timeZone: tz, 
-          hour: "2-digit", 
-          minute: "2-digit", 
-          second: "2-digit", 
-          weekday: "short", 
-          day: "numeric", 
-          month: "short" 
-        }).formatToParts(now);
-        
-        const g = type => p.find(x => x.type === type)?.value ?? "";
-        const h = parseInt(g("hour"));
-        times[name] = { 
-          hm: `${g("hour")}:${g("minute")}`, 
-          s: g("second"), 
-          date: `${g("weekday")}. ${g("day")} ${g("month")}`.toUpperCase(), 
-          night: h >= 20 || h < 7 
-        };
-      });
-      setT(times);
+    const FAMILY = [
+      {id:"papa",name:"Papa Stranger",emoji:"☕",role:"Doyen de la bande, serviteur de Dieu, médite la bible, aime la musique",initials:"PS",col:{bg:"#fef3c7",c:"#92400e"}},
+      {id:"maman",name:"Maman Stranger",emoji:"☀️",role:"Le cœur logistique et l'organisatrice en chef de la maison",initials:"MS",col:{bg:"#fce7f3",c:"#9d174d"}},
+      {id:"yaya",name:"Yaya",emoji:"🎧",role:"La manager, influenceuse et créatrice de style",initials:"YA",col:{bg:"#f3e8ff",c:"#6b21a8"}},
+      {id:"jemina",name:"Jemina Stranger",emoji:"🥑",role:"La juriste fiscaliste communicative et pro du quiz",initials:"JM",col:{bg:"#dcfce7",c:"#166534"}},
+      {id:"jeremie",name:"Jérémie Stranger",emoji:"🛫",role:"L'ingénieur en industrie et globe-trotteur officiel",initials:"JR",col:{bg:"#dbeafe",c:"#1e40af"}},
+      {id:"michael",name:"Michael Stranger",emoji:"⚽",role:"L'expert de l'objectif et footballeur en devenir",initials:"MC",col:{bg:"#d1fae5",c:"#065f46"}},
+      {id:"moise",name:"Moise Stranger",emoji:"🎹",role:"L'artiste et scientifique super-perfectionniste",initials:"MO",col:{bg:"#fee2e2",c:"#991b1b"}},
+      {id:"debora",name:"Débora Stranger",emoji:"🎨",role:"La dernière en quête du sens et tiktokeuse",initials:"DB",col:{bg:"#fef9c3",c:"#854d0d"}},
+    ];
+
+    const AVCOLS = [
+      {bg:"#fef3c7",c:"#92400e"},{bg:"#dcfce7",c:"#166534"},{bg:"#dbeafe",c:"#1e40af"},
+      {bg:"#fce7f3",c:"#9d174d"},{bg:"#f3e8ff",c:"#6b21a8"},{bg:"#d1fae5",c:"#065f46"},
+      {bg:"#fee2e2",c:"#991b1b"},{bg:"#fef9c3",c:"#854d0d"}
+    ];
+
+    const CITIES = [
+      {name:"Paris",tz:"Europe/Paris",flag:"🗼"},
+      {name:"Montréal",tz:"America/Toronto",flag:"🍁"},
+      {name:"Libreville",tz:"Africa/Libreville",flag:"🌿"},
+      {name:"Dakar",tz:"Africa/Dakar",flag:"🌊"}
+    ];
+
+    const INIT = {
+      events:[
+        {id:1,title:"Anniversaire de Maman Stranger",date:"2026-12-28",member:"Maman Stranger"},
+        {id:2,title:"Appel Meet familial dominical",date:"2026-06-01",member:"Tous"},
+        {id:3,title:"Retour de Jérémie de Tokyo",date:"2026-06-08",member:"Jérémie Stranger"},
+        {id:4,title:"Départ vacances d'été SHOLA",date:"2026-07-15",member:"Tous"},
+      ],
+      reminders:[
+        {id:1,text:"Envoyer les photos du weekend au groupe familial",done:false},
+        {id:2,text:"Jemina : préparer la playlist pour les vacances 🎵",done:false},
+        {id:3,text:"Michael : organiser le match de foot avant le départ ⚽",done:false},
+        {id:4,text:"Moise : apporter la partition du nouveau morceau 🎹",done:true},
+      ],
+      projects:[
+        {id:1,title:"Vacances d'Été SHOLA 🌴",desc:"Trouver une grande maison pour loger toute la smala au soleil",
+         tasks:[{id:1,text:"Fixer la semaine définitive de départ",done:true},{id:2,text:"Estimer le budget par foyer",done:false},{id:3,text:"Sélectionner les 3 meilleures annonces Airbnb",done:false}],
+         inspirations:[{id:1,title:"Villa en Ardèche avec piscine",url:"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&q=80",desc:"Grande piscine, 8 chambres"},{id:2,title:"Gîte côte normande",url:"https://images.unsplash.com/photo-1571896349842-9af17ac22985?w=400&q=80",desc:"Vue mer, 6 chambres"}]},
+        {id:2,title:"Livre de Recettes Stranger 📖",desc:"Compiler les secrets culinaires de Papa et Maman Stranger pour la postérité",
+         tasks:[{id:1,text:"Photographier la sauce secrète de Maman Stranger",done:false},{id:2,text:"Demander la recette de terrine de Papa Stranger",done:false}],
+         inspirations:[{id:1,title:"Le Clafoutis de Mamie Ginette",url:"https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&q=80",desc:"La recette originale de 1974"}]},
+      ],
     };
-    
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-  
-  return t;
-}
 
-function getAvi(authorName, idx) {
-  const m = FAMILY.find(f => f.name === authorName || authorName?.startsWith(f.name.split(" ")[0]));
-  return m ? { bg: m.col.bg, c: m.col.c, initials: m.initials } : AVCOLS[idx % AVCOLS.length];
-}
+    const CHARTER = [
+      "Partager au moins un souvenir drôle chaque semaine.",
+      "Publier une photo de notre quotidien dans la gazette régulièrement.",
+      "S'amuser et proposer de nouvelles questions de Quiz loufoques !",
+      "Prendre soin les uns des autres, peu importe le fuseau horaire."
+    ];
 
-function Avi({ authorName, initials, idx }) {
-  const col = getAvi(authorName, idx);
-  return <div className="avi" style={{ background: col.bg, color: col.c }}>{initials || col.initials}</div>;
-}
+    const ws = typeof window !== "undefined" ? window.localStorage : null;
 
-function Chk({ done, onToggle }) {
-  return <div className={`chk${done ? " on" : ""}`} onClick={onToggle}>{done && <span style={{ color: "#fff", fontSize: "10px", fontWeight: "bold" }}>✓</span>}</div>;
-}
+    function useStorage(key, init) {
+      const [v, setV] = useState(init);
+      const k = `shola_${key}`;
+      
+      useEffect(() => {
+        if (!ws) return;
+        const raw = ws.getItem(k);
+        if (raw) {
+          try { 
+            setV(JSON.parse(raw)); 
+          } catch(_) {}
+        }
+      }, [k]);
+      
+      const set = useCallback((val) => {
+        setV(prev => {
+          const n = typeof val === "function" ? val(prev) : val;
+          if (ws) ws.setItem(k, JSON.stringify(n));
+          return n;
+        });
+      }, [k]);
+      
+      return [v, set];
+    }
 
-function LoginModal({ onSelect, allowClose }) {
-  return (
-    <div className="login-screen">
-      <div style={{ width: "100%", maxWidth: "620px", paddingTop: "16px" }}>
-        <div style={{ textAlign: "center", marginBottom: "28px" }}>
-          <div style={{ fontSize: "44px", marginBottom: "10px" }}>🍋</div>
-          <div className="serif" style={{ fontStyle: "italic", fontSize: "26px", color: "#d97706", fontWeight: 500 }}>Famille SHOLA STRANGER</div>
-          <div style={{ color: "#78716c", fontSize: "13px", marginTop: "6px" }}>Votre espace familial privé & sécurisé</div>
-        </div>
-        <div style={{ background: "#fff", border: "1px solid #e5e0d8", borderRadius: "20px", padding: "24px" }}>
-          <div style={{ textAlign: "center", marginBottom: "20px" }}>
-            <div style={{ fontSize: "16px", fontWeight: 600 }}>Qui êtes-vous ? 👋</div>
-            <div style={{ color: "#78716c", fontSize: "12px", marginTop: "4px" }}>Cliquez sur votre profil pour personnaliser votre session</div>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(130px,1fr))", gap: "10px" }}>
-            {FAMILY.map(m => (
-              <div key={m.id} className="mbr-card" onClick={() => onSelect(m)}
-                style={{ background: m.col.bg }}>
-                <div style={{ fontSize: "26px", marginBottom: "6px" }}>{m.emoji}</div>
-                <div style={{ fontWeight: 600, fontSize: "12px", color: m.col.c, lineHeight: 1.2 }}>{m.name}</div>
-                <div style={{ fontSize: "10px", color: m.col.c, opacity: 0.7, marginTop: "4px", fontStyle: "italic", lineHeight: 1.3 }}>{m.role.split(",")[0]}</div>
-              </div>
-            ))}
-          </div>
-          {allowClose && (
-            <div style={{ textAlign: "center", marginTop: "16px" }}>
-              <button className="btn-g" onClick={() => onSelect(null)}>Annuler ×</button>
+    function useClock() {
+      const [t, setT] = useState({});
+      
+      useEffect(() => {
+        const tick = () => {
+          const now = new Date();
+          const times = {};
+          CITIES.forEach(({ name, tz }) => {
+            const p = new Intl.DateTimeFormat("fr-FR", { 
+              timeZone: tz, 
+              hour: "2-digit", 
+              minute: "2-digit", 
+              second: "2-digit", 
+              weekday: "short", 
+              day: "numeric", 
+              month: "short" 
+            }).formatToParts(now);
+            
+            const g = type => p.find(x => x.type === type)?.value ?? "";
+            const h = parseInt(g("hour"));
+            times[name] = { 
+              hm: `${g("hour")}:${g("minute")}`, 
+              s: g("second"), 
+              date: `${g("weekday")}. ${g("day")} ${g("month")}`.toUpperCase(), 
+              night: h >= 20 || h < 7 
+            };
+          });
+          setT(times);
+        };
+        
+        tick();
+        const id = setInterval(tick, 1000);
+        return () => clearInterval(id);
+      }, []);
+      
+      return t;
+    }
+
+    function getAvi(authorName, idx) {
+      const m = FAMILY.find(f => f.name === authorName || authorName?.startsWith(f.name.split(" ")[0]));
+      return m ? { bg: m.col.bg, c: m.col.c, initials: m.initials } : AVCOLS[idx % AVCOLS.length];
+    }
+
+    function Avi({ authorName, initials, idx }) {
+      const col = getAvi(authorName, idx);
+      return <div className="avi" style={{ background: col.bg, color: col.c }}>{initials || col.initials}</div>;
+    }
+
+    function Chk({ done, onToggle }) {
+      return <div className={`chk${done ? " on" : ""}`} onClick={onToggle}>{done && <span style={{ color: "#fff", fontSize: "10px", fontWeight: "bold" }}>✓</span>}</div>;
+    }
+
+    function LoginModal({ onSelect, allowClose }) {
+      return (
+        <div className="login-screen">
+          <div style={{ width: "100%", maxWidth: "620px", paddingTop: "16px" }}>
+            <div style={{ textAlign: "center", marginBottom: "28px" }}>
+              <div style={{ fontSize: "44px", marginBottom: "10px" }}>🍋</div>
+              <div className="serif" style={{ fontStyle: "italic", fontSize: "26px", color: "#d97706", fontWeight: 500 }}>Famille SHOLA STRANGER</div>
+              <div style={{ color: "#78716c", fontSize: "13px", marginTop: "6px" }}>Votre espace familial privé & sécurisé</div>
             </div>
-          )}
-        </div>
-        <div style={{ textAlign: "center", marginTop: "14px", fontSize: "11px", color: "#a8a29e" }}>
-          🔒 Session stockée localement · © 2026 Famille SHOLA STRANGER
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function QG({ clocks, events, setEvents, reminders, setReminders, openModal }) {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-      <div className="card">
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-          <span style={{ fontSize: "22px" }}>🌐</span>
-          <div>
-            <div className="serif" style={{ fontStyle: "italic", fontSize: "17px", fontWeight: 500 }}>Horloge Mondiale</div>
-            <div style={{ color: "#78716c", fontSize: "12px" }}>Pour garder le fil des heures ensemble</div>
-          </div>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(190px,1fr))", gap: "12px" }}>
-          {CITIES.map(city => {
-            const t = clocks[city.name] || {};
-            return (
-              <div key={city.name} style={{ background: t.night ? "#292524" : "#fffdf7", borderRadius: "14px", padding: "18px", border: `1px solid ${t.night ? "#44403c" : "#e5e0d8"}`, color: t.night ? "#fff" : undefined, transition: "background .5s" }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "10px" }}>
-                  <span style={{ fontSize: "13px", fontWeight: 500 }}>{city.flag} {city.name}</span>
-                  <span style={{ fontSize: "15px" }}>{t.night ? "🌙" : "☀️"}</span>
-                </div>
-                <div style={{ fontSize: "30px", fontWeight: 300, letterSpacing: "-0.5px", lineHeight: 1 }}>
-                  {t.hm || "--:--"}<span style={{ fontSize: "13px", color: t.night ? "#a8a29e" : "#78716c", marginLeft: "2px" }}>:{t.s || "00"}</span>
-                </div>
-                <div style={{ fontSize: "10px", color: t.night ? "#a8a29e" : "#78716c", marginTop: "6px", letterSpacing: "0.05em" }}>{t.date}</div>
+            <div style={{ background: "#fff", border: "1px solid #e5e0d8", borderRadius: "20px", padding: "24px" }}>
+              <div style={{ textAlign: "center", marginBottom: "20px" }}>
+                <div style={{ fontSize: "16px", fontWeight: 600 }}>Qui êtes-vous ? 👋</div>
+                <div style={{ color: "#78716c", fontSize: "12px", marginTop: "4px" }}>Cliquez sur votre profil pour personnaliser votre session</div>
               </div>
-            );
-          })}
-        </div>
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: "20px" }}>
-        <div className="card">
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <span style={{ fontSize: "18px" }}>📅</span>
-              <div>
-                <div className="serif" style={{ fontStyle: "italic", fontSize: "15px", fontWeight: 500 }}>Événements à Venir</div>
-                <div style={{ color: "#78716c", fontSize: "11px" }}>Pour ne manquer aucun anniversaire ou réunion</div>
-              </div>
-            </div>
-            <button className="btn-pri" onClick={() => openModal("addEvent")} style={{ padding: "8px 12px", fontSize: "12px" }}>+ Événement</button>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            {[...events].sort((a, b) => a.date < b.date ? -1 : 1).map((ev, i) => {
-              const d = new Date(ev.date + "T00:00:00");
-              const isValidDate = !isNaN(d.getTime());
-              const col = AVCOLS[i % AVCOLS.length];
-              return (
-                <div key={ev.id} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px", background: "#fdf8f0", borderRadius: "10px" }}>
-                  {isValidDate && (
-                    <div style={{ background: col.bg, color: col.c, borderRadius: "8px", padding: "6px 10px", textAlign: "center", minWidth: "44px" }}>
-                      <div style={{ fontSize: "16px", fontWeight: 700, lineHeight: 1 }}>{d.getDate().toString().padStart(2, "0")}</div>
-                      <div style={{ fontSize: "10px", fontWeight: 600 }}>{d.toLocaleDateString("fr-FR", { month: "short" }).toUpperCase()}</div>
-                    </div>
-                  )}
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 500, fontSize: "13px" }}>{ev.title}</div>
-                    <div style={{ color: "#78716c", fontSize: "11px" }}>{ev.member}</div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(130px,1fr))", gap: "10px" }}>
+                {FAMILY.map(m => (
+                  <div key={m.id} className="mbr-card" onClick={() => onSelect(m)}
+                    style={{ background: m.col.bg }}>
+                    <div style={{ fontSize: "26px", marginBottom: "6px" }}>{m.emoji}</div>
+                    <div style={{ fontWeight: 600, fontSize: "12px", color: m.col.c, lineHeight: 1.2 }}>{m.name}</div>
+                    <div style={{ fontSize: "10px", color: m.col.c, opacity: 0.7, marginTop: "4px", fontStyle: "italic", lineHeight: 1.3 }}>{m.role.split(",")[0]}</div>
                   </div>
-                  <button className="btn-g" onClick={() => setEvents(p => p.filter(e => e.id !== ev.id))} style={{ padding: "2px 8px", fontSize: "16px" }}>×</button>
+                ))}
+              </div>
+              {allowClose && (
+                <div style={{ textAlign: "center", marginTop: "16px" }}>
+                  <button className="btn-g" onClick={() => onSelect(null)}>Annuler ×</button>
                 </div>
-              );
-            })}
-            {events.length === 0 && <p style={{ color: "#78716c", fontSize: "13px", textAlign: "center", padding: "16px" }}>Aucun événement à venir</p>}
+              )}
+            </div>
+            <div style={{ textAlign: "center", marginTop: "14px", fontSize: "11px", color: "#a8a29e" }}>
+              🔒 Session stockée localement · © 2026 Famille SHOLA STRANGER
+            </div>
           </div>
         </div>
-        <div className="card">
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <span style={{ fontSize: "18px" }}>🔔</span>
+      );
+    }
+
+    function App() {
+      const [user, setUser] = useStorage("user", null);
+      const [events, setEvents] = useStorage("events", INIT.events);
+      const [reminders, setReminders] = useStorage("reminders", INIT.reminders);
+      const [projects, setProjects] = useStorage("projects", INIT.projects);
+      const clocks = useClock();
+
+      const openModal = (type, data) => {
+        console.log("Modal:", type, data);
+      };
+
+      if (!user) {
+        return <LoginModal onSelect={setUser} allowClose={false} />;
+      }
+
+      return (
+        <div className="hub" style={{ padding: "20px" }}>
+          <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "32px" }}>
+              <Avi authorName={user.name} idx={0} />
               <div>
-                <div className="serif" style={{ fontStyle: "italic", fontSize: "15px", fontWeight: 500 }}>La Boussole des Retrouvailles</div>
-                <div style={{ color: "#78716c", fontSize: "11px" }}>Les petites attentions du quotidien familial</div>
+                <div className="serif" style={{ fontSize: "24px", fontStyle: "italic", fontWeight: 500 }}>Bienvenue, {user.name.split(" ")[0]} 👋</div>
+                <div style={{ color: "#78716c", fontSize: "13px" }}>Salon d'interaction familial SHOLA</div>
+              </div>
+              <button className="btn-g" onClick={() => setUser(null)} style={{ marginLeft: "auto" }}>Changer ×</button>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "20px" }}>
+              <div className="card">
+                <div style={{ fontSize: "18px", marginBottom: "12px" }}>🌐 Horloge Mondiale</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  {CITIES.map(city => {
+                    const t = clocks[city.name] || {};
+                    return (
+                      <div key={city.name} style={{ fontSize: "12px" }}>
+                        <span>{city.flag} {city.name}</span>
+                        <div style={{ fontWeight: 600, fontSize: "16px" }}>{t.hm || "--:--"}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="card">
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+                  <div style={{ fontSize: "18px" }}>📅 Événements ({events.length})</div>
+                  <button className="btn-pri" onClick={() => openModal("addEvent")} style={{ padding: "6px 12px", fontSize: "11px" }}>+</button>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                  {events.slice(0, 3).map(ev => (
+                    <div key={ev.id} style={{ fontSize: "12px", padding: "8px", background: "#fdf8f0", borderRadius: "8px" }}>
+                      <div style={{ fontWeight: 500 }}>{ev.title}</div>
+                      <div style={{ color: "#78716c", fontSize: "11px" }}>{ev.date}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="card">
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+                  <div style={{ fontSize: "18px" }}>🔔 Rappels ({reminders.filter(r => !r.done).length})</div>
+                  <button className="btn-out" onClick={() => openModal("addReminder")} style={{ padding: "6px 12px", fontSize: "11px" }}>+</button>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                  {reminders.slice(0, 3).map(r => (
+                    <div key={r.id} style={{ display: "flex", gap: "8px", fontSize: "12px", alignItems: "center" }}>
+                      <Chk done={r.done} onToggle={() => setReminders(p => p.map(x => x.id === r.id ? {...x, done: !x.done} : x))} />
+                      <span style={{ textDecoration: r.done ? "line-through" : "none", color: r.done ? "#a8a29e" : "#1c1917" }}>{r.text}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-            <button className="btn-out" onClick={() => openModal("addReminder")}>+ Rappel</button>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            {reminders.map(r => (
-              <div key={r.id} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px", background: "#fdf8f0", borderRadius: "10px" }}>
-                <Chk done={r.done} onToggle={() => setReminders(p => p.map(x => x.id === r.id ? { ...x, done: !x.done } : x))} />
-                <span style={{ flex: 1, fontSize: "13px", textDecoration: r.done ? "line-through" : "none", color: r.done ? "#a8a29e" : "#1c1917" }}>{r.text}</span>
-                <button className="btn-g" onClick={() => setReminders(p => p.filter(x => x.id !== r.id))} style={{ padding: "2px 8px", fontSize: "16px" }}>×</button>
-              </div>
-            ))}
-            {reminders.length === 0 && <p style={{ color: "#78716c", fontSize: "13px", textAlign: "center", padding: "16px" }}>Aucun rappel pour l'instant</p>}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
-function BI({ projects, setProjects, openModal }) {
-  const [exp, setExp] = useState({});
-  const toggle = id => setExp(p => ({ ...p, [id]: !p[id] }));
-  const toggleTask = (pid, tid) => setProjects(p => p.map(pr => pr.id === pid ? { ...pr, tasks: pr.tasks.map(t => t.id === tid ? { ...t, done: !t.done } : t) } : pr));
-  
-  return (
-    <div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "24px" }}>
-        <div>
-          <div className="serif" style={{ fontStyle: "italic", fontSize: "22px", fontWeight: 500 }}>💡 La Boîte à Idées</div>
-          <div style={{ color: "#78716c", fontSize: "13px", marginTop: "4px" }}>Proposez des projets collectifs, ajoutez des inspirations, et suivez l'avancement ensemble.</div>
+            <div className="card" style={{ marginTop: "24px" }}>
+              <div style={{ fontSize: "18px", fontWeight: 600, marginBottom: "12px" }}>💡 Projets en cours ({projects.length})</div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "12px" }}>
+                {projects.map(p => (
+                  <div key={p.id} style={{ padding: "12px", background: "#fdf8f0", borderRadius: "10px" }}>
+                    <div style={{ fontWeight: 500, marginBottom: "4px" }}>{p.title}</div>
+                    <div style={{ fontSize: "12px", color: "#78716c", marginBottom: "8px" }}>{p.desc}</div>
+                    <div style={{ fontSize: "11px", color: "#d97706" }}>{p.tasks.filter(t => t.done).length}/{p.tasks.length} tâches</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ textAlign: "center", marginTop: "32px", fontSize: "11px", color: "#a8a29e" }}>
+              🔒 Données stockées localement dans votre navigateur
+            </div>
+          </div>
         </div>
-        <button className="btn-pri" onClick={() => openModal("addProject")}>+ Nouveau Projet</button>
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(340px,1fr))", gap: "20px" }}>
-        {projects.map(proj => {
-          const done = proj.tasks.filter(t => t.done).length, total = proj.tasks.length;
-          const pct = total > 0 ? Math.round(done / total * 100) : 0;
-          const isExp = !exp[proj.id];
-          return (
-            <div key={proj.id} className="card" style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
-                <div style={{ flex: 1 }}>
-                  <div className="serif" style={{ fontStyle: "italic", fontSize: "16px", fontWeight: 500 }}>{proj.title}</div>
-                  <div style={{ color: "#78716c", fontSize: "12px", marginTop: "2px" }}>{proj.desc}</div>
-                </div>
-                <button className="btn-g" onClick={() => setProjects(p => p.filter(x => x.id !== proj.id))} style={{ fontSize: "16px", padding: "2px 8px" }}>×</button>
-              </div>
-              <div>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-                  <span style={{ fontSize: "11px", fontWeight: 600, color: "#d97706", letterSpacing: "0.04em" }}>✅ SOUS-TÂCHES</span>
-                  <span style={{ marginLeft: "auto", fontSize: "11px", color: "#78716c" }}>{done} / {total} ({pct}%)</span>
-                </div>
-                <div className="pbg"><div className="pbar" style={{ width: `${pct}%` }} /></div>
-              </div>
-              <div>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
-                  <span style={{ fontSize: "11px", fontWeight: 600, color: "#78716c" }}>IDÉES ET SOUS-TÂCHES ({proj.tasks.length + proj.inspirations.length})</span>
-                  <button className="btn-g" onClick={() => toggle(proj.id)} style={{ fontSize: "11px", padding: "3px 8px" }}>{isExp ? "Plier ▲" : "Déplier ▼"}</button>
-                </div>
-                {isExp && (
-                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "4px" }}>
-                      <span style={{ fontSize: "12px", fontWeight: 500 }}>☑ To-Do List du Projet</span>
-                      <button className="btn-g" onClick={() => openModal("addTask", { pid: proj.id })} style={{ fontSize: "11px", color: "#d97706", padding: "2px 8px" }}>+ Ajouter</button>
-                    </div>
-                    {proj.tasks.map(task => (
-                      <div key={task.id} style={{ display: "flex", alignItems: "center", gap: "8px", background: "#fdf8f0",
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
